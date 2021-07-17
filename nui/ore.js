@@ -43,7 +43,7 @@ function Selected(key) {
         document.getElementById('created').innerText = new Date(Created).toISOString().slice(0, 19).replace('T', ' ')
         document.getElementById('lastseen').innerText = new Date(Login).toISOString().slice(0, 19).replace('T', ' ')
         document.getElementById('city').innerText = City
-        document.getElementById('Phone').innerText = Phone
+        document.getElementById('phone').innerText = Phone
     }
 };
 
@@ -81,27 +81,40 @@ function CharacterMake() {
     OnAction(PacketTemp);
 };
 
+/* https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript */
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
+}
+
 function OnNotify(data){
     var text = data.text
     var style = data.style
     var fade = data.fade
+    var rand = makeid(35)
     var element
     if (style == 'normal') {
-      element = $('<div class="noty normal"></div>'); 
+      element = $('<div id="'+ rand +'" class="noty normal"></div>'); 
     } else if (style == 'success') {
-      element = $('<div class="noty success"></div>');
+      element = $('<div id="'+ rand +'" class="noty success"></div>');
     } else if (style == 'warn') {
-      element = $('<div class="noty warn"></div>');
+      element = $('<div id="'+ rand +'" class="noty warn"></div>');
     } else if (style == 'error') {
-      element = $('<div class="noty error"></div>'); 
+      element = $('<div id="'+ rand +'" class="noty error"></div>');
     } else {
-      element = $('<div class="noty normal"></div>');     
+      element = $('<div id="'+ rand +'" class="noty normal"></div>');    
     };
 
     $('#Notify-Window').prepend(element);
-    $(element).innerText(text);
+    $(element).text(text);
     $(element).fadeIn(750);
-    
+
     setTimeout(function(){
        $(element).fadeOut(fade-(fade / 2));
     }, fade / 2);
