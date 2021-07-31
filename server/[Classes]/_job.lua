@@ -142,7 +142,37 @@ function c.class.CreateJob(tab)
             end
         end
     end
+    --
+    self.FindMember = function(member)
+        for _,v in pairs(self.Members) do
+            if v == member then
+                return true
+            end
+        end
+        return false
+    end
+    --
+    self.AddMember = function(member)
+        local check = self.FindMember(member)
+        if not check then
+            table.insert(self.Members, member)
+        end
+    end
+    --
+    self.RemoveMember = function(member)
+        local check = self.FindMember(member)
+        if check then
+            table.remove(self.Members, member)
+        end
+    end
+    --
+    self.SetBoss = function(member)
+        self.AddMember(member)
+        self.Boss = member
+    end
+    --
 
+    --
     c.debug("End Job Creation")
     return self
 end

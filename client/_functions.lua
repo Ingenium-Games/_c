@@ -315,7 +315,7 @@ function c.CreateVehicle(model,x,y,z,h)
     local hash = (GetHashKey(model) or model)
     --
     if not IsModelInCdimage(hash) then 
-        c.debug("Model / Hash not found: ".. model .. " " ..hash)
+        c.debug("Model / Hash not found: ".. model .. " / " ..hash)
         return 
     end
     --

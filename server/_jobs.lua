@@ -76,3 +76,5 @@ end)
 TriggerEvent('Server:Character:SetJob', self.ID, self.GetJob())
 self.TriggerEvent('Client:Character:SetJob', self.GetJob())
 ]]--
+
+--[[Using currently active table to send out pay cycles.]]--
