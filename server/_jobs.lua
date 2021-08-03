@@ -131,7 +131,6 @@ function c.job.Payroll(bool)
 end
 
 function c.job.PayCycle()
-    local time = conf.paycycle
     local function Do()
         c.job.Payroll(conf.enablejobpayroll)     
         -- Adding cleanup of empty or false records.
@@ -141,7 +140,7 @@ function c.job.PayCycle()
                 table.remove(CurrentlyActive, k)
             end
         end
-        SetTimeout(Do, time)
+        SetTimeout(conf.paycycle, Do)
     end
-    SetTimeout(Do, time)
+    SetTimeout(conf.paycycle, Do)
 end
