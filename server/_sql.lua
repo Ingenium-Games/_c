@@ -1380,7 +1380,7 @@ local VehicleSaveData = -1
 MySQL.Async.store(
     "UPDATE `vehicles` SET `Coords` = @Coords, `Keys` = @Keys, `Condition` = @Condition, `Modifications` = @Modifications, `Garage` = @Garage, `State` = @State, `Impound` = @Impound, `Wanted` = @Wanted  WHERE `Plate` = @Plate;",
     function(id)
-        CarSaveData = id
+        VehicleSaveData = id
     end)
 
 --- Save Single User/Character
@@ -1505,4 +1505,41 @@ function c.sql.GetVehicleByPlate(Plate, cb)
         cb()
     end
     return result
+end
+
+
+-------------------------------------------------------------------------------
+--- JOBS TABLE
+-------------------------------------------------------------------------------
+
+local JobSaveData = -1
+MySQL.Async.store(
+    "UPDATE `job_accounts` SET `Accounts` = @Accuonts WHERE `Name` = @Name;",
+    function(id)
+        JobSaveData = id
+    end)
+
+    --- Save All Characters from the xPLayer Table.
+---@param cb function "To be called on SQL 'UPDATE' statements are completed."
+function c.sql.SaveJobs(cb)
+    local xJobs = c.job.GetJobs()
+    for i = 1, #xJobs, 1 do
+        local data = c.job.GetJob(i)
+        if data then
+            -- Tables require JSON Encoding.
+            local Accounts = json.encode(data.GetAccounts())
+            -- 
+            local Name = data.GetName()
+            MySQL.Async.insert(JobSaveData, {
+                ['@Accounts'] = Accounts,
+                --
+                ['@Name'] = Name
+            }, function(r)
+                -- Do nothing.
+            end)
+        end
+    end
+    if cb then
+        cb()
+    end
 end

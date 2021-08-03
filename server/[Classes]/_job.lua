@@ -22,6 +22,10 @@ function c.class.CreateJob(tab)
     self.Description = tab.Description
     self.Accounts = tab.Accounts
     --
+    self.GetName = function()
+        return self.Name
+    end
+    --
     self.GetGrades = function()
         return self.Grades
     end
