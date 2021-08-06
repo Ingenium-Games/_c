@@ -58,7 +58,7 @@ function c.class.CreateJob(tab)
     --
     self.GetAccount = function(acc)
         for k, v in ipairs(self.Accounts) do
-            if k == acc then
+            if v == acc then
                 return v
             end
         end
@@ -76,9 +76,13 @@ function c.class.CreateJob(tab)
         if num >= 0 then
             local acc = self.GetAccount('safe')
             if acc then
-                local pMoney = acc
-                local nMoney = c.math.Decimals(num, 0)
-                acc = nMoney
+                local bkp = acc
+                acc = c.math.Decimals(num, 0)
+                if acc < 0 then
+                    acc = bkp
+                    c.debug("Job "..self.Name.." has SetSafe() Cancelled due to Negative  balance remaining.")
+                    CancelEvent()
+                end
             end
         end
     end
@@ -88,8 +92,13 @@ function c.class.CreateJob(tab)
         if num > 0 then
             local acc = self.GetAccount('safe')
             if acc then
-                local nMoney = acc + c.math.Decimals(num, 0)
-                acc = nMoney
+                local bkp = acc
+                acc = acc + c.math.Decimals(num, 0)
+                if acc < 0 then
+                    acc = bkp
+                    c.debug("Job "..self.Name.." has AddSafe() Cancelled due to Negative balance remaining.")
+                    CancelEvent()
+                end
             end
         end
     end
@@ -98,10 +107,14 @@ function c.class.CreateJob(tab)
         local num = c.check.Number(v)
         if num > 0 then
             local acc = self.GetAccount('safe')
-
             if acc then
-                local nMoney = acc - c.math.Decimals(num, 0)
-                acc = nMoney
+                local bkp = acc
+                acc = acc - c.math.Decimals(num, 0)
+                if acc < 0 then
+                    acc = bkp
+                    c.debug("Job "..self.Name.." has SetSafe() Cancelled due to Negative balance remaining.")
+                    CancelEvent()
+                end
             end
         end
     end
@@ -118,9 +131,11 @@ function c.class.CreateJob(tab)
         if num >= 0 then
             local acc = self.GetAccount('bank')
             if acc then
-                local pMoney = acc
-                local nMoney = c.math.Decimals(num, 0)
-                acc = nMoney
+                local bkp = acc
+                acc = c.math.Decimals(num, 0)
+                if acc < 0 then
+
+                end
             end
         end
     end
@@ -130,8 +145,10 @@ function c.class.CreateJob(tab)
         if num > 0 then
             local acc = self.GetAccount('bank')
             if acc then
-                local nMoney = acc + c.math.Decimals(num, 0)
-                acc = nMoney
+                acc = acc + c.math.Decimals(num, 0)
+                if acc < 0 then
+
+                end
             end
         end
     end
@@ -141,8 +158,10 @@ function c.class.CreateJob(tab)
         if num > 0 then
             local acc = self.GetAccount('bank')
             if acc then
-                local nMoney = acc - c.math.Decimals(num, 0)
-                acc = nMoney
+                acc = acc - c.math.Decimals(num, 0)
+                if acc < 0 then
+
+                end
             end
         end
     end

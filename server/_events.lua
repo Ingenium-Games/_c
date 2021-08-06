@@ -53,7 +53,7 @@ RegisterNetEvent("Server:Character:SetJob")
 AddEventHandler("Server:Character:SetJob", function(req, data)
     local src = req or source
     local xPlayer = c.data.GetPlayer(src)
-    -- and Add to new job
+    -- Add New Job command permissions for ACL system
     ExecuteCommand(('add_principal identifier.%s job.%s'):format(xPlayer.License_ID, xPlayer.GetJob().Name))
 end)
 
@@ -80,8 +80,7 @@ AddEventHandler('Server:Packet:Update', function(data)
     -- Status Modifiers
     xPlayer.SetModifiers(data.Modifiers)
     -- Coords
-    xPlayer.SetCoords(data.Coords)
-    
+    xPlayer.SetCoords(data.Coords)    
 end)
 
 -- ====================================================================================--
@@ -95,7 +94,7 @@ AddEventHandler("Server:Bank:Deposit", function(data, req)
     --
     xPlayer.RemoveMoney(amount)
     xPlayer.AddBank(amount)
-    xPlayer.TriggerEvent("Client:Notify", xPlayer.ID, "Diposited $"..amount, "warn")
+    TriggerClientEvent("Client:Notify", xPlayer.ID, "Diposited $"..amount, "warn")
 end)
 
 RegisterNetEvent("Server:Bank:Withdraw")
@@ -106,7 +105,7 @@ AddEventHandler("Server:Bank:Withdraw", function(data, req)
     --
     xPlayer.RemoveBank(amount)
     xPlayer.AddMoney(amount)
-    xPlayer.TriggerEvent("Client:Notify", xPlayer.ID, "Withdrew $"..amount, "warn")
+    TriggerClientEvent("Client:Notify", xPlayer.ID, "Withdrew $"..amount, "warn")
 end)
 
 RegisterNetEvent("Server:Bank:Transfer")
@@ -119,8 +118,8 @@ AddEventHandler("Server:Bank:Transfer", function(data, req, id)
     --
     xPlayer.RemoveBank(amount)
     tPlayer.AddBank(amount)
-    xPlayer.TriggerEvent("Client:Notify", xPlayer.ID, "Sent $"..amount.." to "..tPlayer.Full_Name, "warn")
-    tPlayer.TriggerEvent("Client:Notify", tPlayer.ID, "Recieved $"..amount.." from "..xPlayer.Full_Name, "warn")
+    TriggerClientEvent("Client:Notify", xPlayer.ID, "Sent $"..amount.." to "..tPlayer.Full_Name, "warn")
+    TriggerClientEvent("Client:Notify", tPlayer.ID, "Recieved $"..amount.." from "..xPlayer.Full_Name, "warn")
 end)
 
 RegisterNetEvent("Server:Bank:Remove")
@@ -130,7 +129,7 @@ AddEventHandler("Server:Bank:Remove", function(data, req)
     local xPlayer = c.data.GetPlayer(src)
     --
     xPlayer.RemoveBank(amount)
-    xPlayer.TriggerEvent("Client:Notify", xPlayer.ID, "Payed $"..amount, "warn")
+    TriggerClientEvent("Client:Notify", xPlayer.ID, "Payed $"..amount, "warn")
 end)
 
 RegisterNetEvent("Server:Bank:Add")
@@ -140,5 +139,5 @@ AddEventHandler("Server:Bank:Add", function(data, req)
     local xPlayer = c.data.GetPlayer(src)
     --
     xPlayer.AddBank(amount)
-    xPlayer.TriggerEvent("Client:Notify", xPlayer.ID, "$"..amount.." was added to your account.", "warn")
+    TriggerClientEvent("Client:Notify", xPlayer.ID, "$"..amount.." was added to your account.", "warn")
 end)
