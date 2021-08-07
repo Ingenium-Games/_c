@@ -45,10 +45,10 @@ exports("JobsOnline", c.job.ActiveMembers())
 --- 
 ---@param job string
 ---@param grade any
-function c.job.Exist(job, grade)
+function c.job.Exist(name, grade)
 	local grade = tostring(grade)
-	if job and grade then
-		if c.jobs[job] and c.jobs[job].grades[grade] then
+	if name and grade then
+		if c.jobs[name] and c.jobs[name].Grades[grade] then
 			return true
 		end
 	end
@@ -58,8 +58,8 @@ end
 --- Same as above.
 ---@param job string
 ---@param grade any
-function c.DoesJobExist(job, grade)
-    return c.job.Exist(job, grade)
+function c.DoesJobExist(name, grade)
+    return c.job.Exist(name, grade)
 end
 
 RegisterNetEvent("Server:Character:OffDuty")

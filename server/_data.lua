@@ -239,7 +239,5 @@ function c.data.LoadPlayer(source, Character_ID)
         c.data.SetPlayer(src, xPlayer)
         c.inst.SetPlayer(source, xPlayer.GetInstance())
         TriggerClientEvent('Client:Character:Loaded', src, data)
-        -- Work around to trigger SetJob on load
-        xPlayer.SetJob(xPlayer.GetJob())
     end)
 end

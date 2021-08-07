@@ -13,15 +13,21 @@ math.randomseed(c.Seed)
 
 -- Triggered after character has been loaded from db and informaiton is passed to client
 RegisterNetEvent("Server:Character:Loaded")
-AddEventHandler("Server:Character:Loaded", function(data)
+AddEventHandler("Server:Character:Loaded", function()
     local src = source
 
 end)
 
 -- Triggered by the client after it has recieved its character data.
 RegisterNetEvent("Server:Character:Ready")
-AddEventHandler("Server:Character:Ready", function(data)
+AddEventHandler("Server:Character:Ready", function()
     local src = source
+    local xPlayer = c.data.GetPlayer(src)
+    
+    -- Work around to trigger SetJob on load
+    local job = xPlayer.GetJob()
+    xPlayer.SetJob(job)
+    --
 
 end)
 

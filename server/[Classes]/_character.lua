@@ -40,13 +40,12 @@ function c.class.CreateCharacter(character_id)
     
     -- Tables (JSONIZE)
     self.Job = json.decode(data.Job)
-    self.Accounts = json.decode(data.Accounts)
-    self.Appearance = json.decode(data.Appearance)
-    self.Inventory = json.decode(data.Inventory)
-    self.Licenses = json.decode(data.Licenses)
-    self.Modifiers = json.decode(data.Modifiers)
     self.Coords = json.decode(data.Coords)
-
+    self.Accounts = json.decode(data.Accounts)
+    self.Licenses = json.decode(data.Licenses)
+    self.Inventory = json.decode(data.Inventory)
+    self.Modifiers = json.decode(data.Modifiers)    
+    self.Appearance = json.decode(data.Appearance)
     
     ---- FUNCTIONS
     -- This one is to check if they are a VIP/Supporter of the server, ie tebex linked.
@@ -223,25 +222,22 @@ function c.class.CreateCharacter(character_id)
     end
     --
     self.SetJob = function(t)
-        local tab = c.check.Table(t)
-        if c.job.Exist(t.job, t.grade) then
+        if c.job.Exist(t.Name, t.Grade) then
             -- Remove from Current Job 
-            ExecuteCommand(('remove_principal identifier.%s job.%s'):format(self.License_ID, self.GetJob().Name))
+            ExecuteCommand(('remove_principal identifier.%s job.%s'):format(self.License_ID, self.Job.Name))
             --
-            local jobObject, gradeObject = c.jobs[t.job], c.jobs[t.job].grades[t.grade]
+            local Object, Grades = c.jobs[t.Name], c.jobs[t.Name].Grades[t.Grade]
             --
-            self.Job.Name = jobObject.name
-            self.Job.Label = jobObject.label
-            --
-            self.Job.Grade = gradeObject.grade
-            self.Job.Grade_Name = gradeObject.name
-            self.Job.Grade_Label = gradeObject.label
-            self.Job.Grade_Salary = gradeObject.salary
+            self.Job.Name = Object.Name
+            self.Job.Label = Object.Label
+            self.Job.Grade = Grades.Grade
+            self.Job.Grade_Label = Grades.Grade_Label
+            self.Job.Grade_Salary = Grades.Grade_Salary
             --
             TriggerEvent('Server:Character:SetJob', self.ID, self.GetJob())
             TriggerClientEvent('Client:Character:SetJob', self.ID, self.GetJob())
         else
-            c.debug('Ignoring invalid .SetJob() usage for "%s"'):format(self.Name)
+            c.debug('Ignoring invalid .SetJob() usage for %s'):format(self.Name)
         end
     end
     --
