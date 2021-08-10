@@ -29,15 +29,15 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `Birth_Date` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'The Characters DOB in DD/MM/YYYY format.',
   `Height` int(3) DEFAULT NULL COMMENT 'The Characters height in CM.',
   `Phone` varchar(7) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Job` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '{"job":unemployed,"grade":0}',
+  `Job` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '{"Name":"none","Grade":1}',
   `Notes` varchar(4500) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `Photo` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'img/icons8-team-100.png',
   `Appearance` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '{"sex":0}',
   `Inventory` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '{}',
   `Licenses` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '{}',
-  `Accounts` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Modifiers` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Traits` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Accounts` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '{}',
+  `Modifiers` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '{}',
+  `Traits` longtext COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '{}',
   `Health` int(3) NOT NULL DEFAULT 400,
   `Armour` int(3) NOT NULL DEFAULT 0,
   `Hunger` int(3) NOT NULL DEFAULT 100,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   KEY `Instance` (`Instance`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Character Table';
 
--- Dumping data for table db.characters: ~2 rows (approximately)
+-- Dumping data for table db.characters: ~0 rows (approximately)
 /*!40000 ALTER TABLE `characters` DISABLE KEYS */;
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 
@@ -94,9 +94,22 @@ CREATE TABLE IF NOT EXISTS `character_accounts` (
   CONSTRAINT `FK_character_accounts_characters` FOREIGN KEY (`Character_ID`) REFERENCES `characters` (`Character_ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table db.character_accounts: ~2 rows (approximately)
+-- Dumping data for table db.character_accounts: ~0 rows (approximately)
 /*!40000 ALTER TABLE `character_accounts` DISABLE KEYS */;
 /*!40000 ALTER TABLE `character_accounts` ENABLE KEYS */;
+
+-- Dumping structure for table db.character_outfits
+CREATE TABLE IF NOT EXISTS `character_outfits` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Character_ID` varchar(50) DEFAULT NULL,
+  `Number` int(11) DEFAULT NULL,
+  `Appearance` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table db.character_outfits: ~1 rows (approximately)
+/*!40000 ALTER TABLE `character_outfits` DISABLE KEYS */;
+/*!40000 ALTER TABLE `character_outfits` ENABLE KEYS */;
 
 -- Dumping structure for table db.jobs
 CREATE TABLE IF NOT EXISTS `jobs` (
@@ -113,45 +126,45 @@ CREATE TABLE IF NOT EXISTS `jobs` (
 -- Dumping data for table db.jobs: ~38 rows (approximately)
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
 INSERT INTO `jobs` (`ID`, `Name`, `Label`, `Grade`, `Grade_Label`, `Grade_Salary`) VALUES
-	(1, 'none', 'Unemployed', 0, 'Unemployed', 8),
-	(2, 'cop', 'Police Department', 0, 'Cadet', 17),
-	(3, 'cop', '', 1, 'Junior Officer', 22),
-	(4, 'cop', '', 2, 'Officer', 26),
-	(5, 'cop', '', 3, 'Senior Officer', 29),
-	(6, 'ems', 'Emergancy Medical Services', 0, 'Trainee', 19),
-	(7, 'ems', NULL, 1, 'Paramedic', 24),
-	(8, 'ems', NULL, 2, 'Doctor', 29),
-	(9, 'pdm', 'Premium Motor Sport', 0, 'Pre-Delivery', 13),
-	(10, 'pdm', NULL, 1, 'Floor Sales', 18),
-	(11, 'pdm', NULL, 2, 'Sales Expert', 23),
-	(12, 'pdm', NULL, 3, 'Operations Director', 27),
-	(13, 'ems', NULL, 3, 'Cheif Medical Officer', 33),
-	(14, 'cop', NULL, 4, 'Cheif of Police', 33),
-	(15, 'benny', 'Benny\'s Original Motorworks', 0, 'Apprentice', 12),
-	(16, 'benny', NULL, 1, 'Mechanic', 22),
-	(17, 'benny', NULL, 2, 'Import Logistics', 26),
-	(18, 'benny', NULL, 3, 'Boss Man', 30),
-	(19, 'news', 'Wezeal News', 0, 'Intern', 10),
-	(20, 'news', NULL, 1, 'Camera Crew', 16),
-	(21, 'news', NULL, 2, 'Reporter', 21),
-	(22, 'news', NULL, 3, 'DJ Mixer', 25),
-	(23, 'news', NULL, 4, 'News Anchor', 29),
-	(24, 'bins', 'Desperado\'s Waste Services', 0, 'Waste Colector', 15),
-	(25, 'bins', NULL, 1, 'Heavy Colections', 22),
-	(26, 'bins', NULL, 2, 'Renew Technition', 25),
-	(27, 'bins', NULL, 3, 'Service Logistic Manager', 28),
-	(28, 'varg', 'Vargo', 0, 'Repin Yellow', 5),
-	(29, 'ball', 'Baller', 0, 'Repin Purple', 5),
-	(30, 'grov', 'Grove', 0, 'Repin Green', 5),
-	(31, 'king', 'King\'s', 0, 'Repin Red', 5),
-	(32, 'pepe', 'Pepe\'s Pizzaria', 0, 'Delivery Driver', 10),
-	(33, 'pepe', NULL, 1, 'Pizza Chef', 18),
-	(34, 'pepe', NULL, 2, 'Franchisee', 24),
-	(35, 'gopo', 'Go Postal', 0, 'Delivery Driver', 13),
-	(36, 'mine', 'Caveat Cutters Union', 0, 'Miner', 13),
-	(37, 'lumb', 'Chippy Chop\'ns Wood Shop\'n', 0, 'Wood Cutter', 13),
-	(38, 'chic', 'Cluckin\' Bell', 0, 'Chicken Packer', 13),
-	(39, 'bank', 'Fleeca', 0, 'Associate', 21);
+	(1, 'none', 'Unemployed', 1, 'Unemployed', 8),
+	(2, 'cop', 'Police Department', 1, 'Cadet', 17),
+	(3, 'cop', '', 2, 'Junior Officer', 22),
+	(4, 'cop', '', 3, 'Officer', 26),
+	(5, 'cop', '', 4, 'Senior Officer', 29),
+	(6, 'ems', 'Emergancy Medical Services', 1, 'Trainee', 19),
+	(7, 'ems', NULL, 2, 'Paramedic', 24),
+	(8, 'ems', NULL, 3, 'Doctor', 29),
+	(9, 'pdm', 'Premium Motor Sport', 1, 'Pre-Delivery', 13),
+	(10, 'pdm', NULL, 2, 'Floor Sales', 18),
+	(11, 'pdm', NULL, 3, 'Sales Expert', 23),
+	(12, 'pdm', NULL, 4, 'Operations Director', 27),
+	(13, 'ems', NULL, 4, 'Cheif Medical Officer', 33),
+	(14, 'cop', NULL, 5, 'Cheif of Police', 33),
+	(15, 'benny', 'Benny\'s Original Motorworks', 1, 'Apprentice', 12),
+	(16, 'benny', NULL, 2, 'Mechanic', 22),
+	(17, 'benny', NULL, 3, 'Import Logistics', 26),
+	(18, 'benny', NULL, 4, 'Boss Man', 30),
+	(19, 'news', 'Wezeal News', 1, 'Intern', 10),
+	(20, 'news', NULL, 2, 'Camera Crew', 16),
+	(21, 'news', NULL, 3, 'Reporter', 21),
+	(22, 'news', NULL, 4, 'DJ Mixer', 25),
+	(23, 'news', NULL, 5, 'News Anchor', 29),
+	(24, 'bins', 'Desperado\'s Waste Services', 1, 'Waste Colector', 15),
+	(25, 'bins', NULL, 2, 'Heavy Colections', 22),
+	(26, 'bins', NULL, 3, 'Renew Technition', 25),
+	(27, 'bins', NULL, 4, 'Service Logistic Manager', 28),
+	(28, 'varg', 'Vargo', 1, 'Repin Yellow', 5),
+	(29, 'ball', 'Baller', 1, 'Repin Purple', 5),
+	(30, 'grov', 'Grove', 1, 'Repin Green', 5),
+	(31, 'king', 'King\'s', 1, 'Repin Red', 5),
+	(32, 'pepe', 'Pepe\'s Pizzaria', 1, 'Delivery Driver', 10),
+	(33, 'pepe', NULL, 2, 'Pizza Chef', 18),
+	(34, 'pepe', NULL, 3, 'Franchisee', 24),
+	(35, 'gopo', 'Go Postal', 1, 'Delivery Driver', 13),
+	(36, 'mine', 'Caveat Cutters Union', 1, 'Miner', 13),
+	(37, 'lumb', 'Chippy Chop\'ns Wood Shop\'n', 1, 'Wood Cutter', 13),
+	(38, 'chic', 'Cluckin\' Bell', 1, 'Chicken Packer', 13),
+	(39, 'bank', 'Fleeca', 1, 'Associate', 21);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 
 -- Dumping structure for table db.job_accounts
@@ -166,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `job_accounts` (
   KEY `Name` (`Name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table db.job_accounts: ~17 rows (approximately)
+-- Dumping data for table db.job_accounts: ~0 rows (approximately)
 /*!40000 ALTER TABLE `job_accounts` DISABLE KEYS */;
 /*!40000 ALTER TABLE `job_accounts` ENABLE KEYS */;
 
@@ -193,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `Ace` (`Ace`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Users Table';
 
--- Dumping data for table db.users: ~1 rows (approximately)
+-- Dumping data for table db.users: ~0 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
