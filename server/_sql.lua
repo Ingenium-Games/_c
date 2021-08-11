@@ -1522,9 +1522,9 @@ MySQL.Async.store(
     --- Save All Characters from the xPLayer Table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
 function c.sql.SaveJobs(cb)
-    local xJobs = c.job.GetJobs()
-    for i = 1, #xJobs, 1 do
-        local data = c.job.GetJob(i)
+    local xJobs = c.data.GetJobs()
+    for k,v in pairs(xJobs) do
+        local data = v
         if data then
             -- Tables require JSON Encoding.
             local Accounts = json.encode(data.GetAccounts())

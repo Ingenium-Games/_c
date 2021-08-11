@@ -185,6 +185,10 @@ function c.data.CreateJobObjects()
     end
 end
 
+function c.data.GetJobs()
+    return c.jdex
+end
+
 function c.data.GetJob(str)
     return c.jdex[str]
 end

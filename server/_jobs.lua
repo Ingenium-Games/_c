@@ -89,7 +89,7 @@ end)
 AddEventHandler("Server:Character:SetJob", function(req, data)
     local src = req or source
     CurrentlyActive[src] = data
-    print(c.table.Dump(CurrentlyActive))
+    -- print(c.table.Dump(CurrentlyActive))
 end)
 
 -- cleanup the table to reduce crap.
@@ -106,7 +106,7 @@ function c.job.Payroll(bool)
             if type(v) == 'table' then
                 -- CurrentlyActive[1] = [Name='popo',Grade=2,etc,etc]
                 local xPlayer = c.data.GetPlayer(k)
-                local xJob = c.data.GetJob(v.Name)
+                local xJob = c.data.GetJob(CurrentlyActive[k].Name)
                 --
                 xPlayer.AddBank(v.Grade_Salary)
                 TriggerClientEvent("Client:Notify", k, "Recieved Payment: $"..v.Grade_Salary.." deposided confirmed.")

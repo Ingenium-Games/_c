@@ -11,7 +11,7 @@ math.randomseed(c.Seed)
 -- ====================================================================================--
 
 function c.class.CreateJob(tab)
-    c.debug("Start Job Creation")
+    -- c.debug("Start Job Creation")
     local self = {}
     --
     self.Name = tab.Name
@@ -197,6 +197,6 @@ function c.class.CreateJob(tab)
     --
 
     --
-    c.debug("End Job Creation")
+    -- c.debug("End Job Creation")
     return self
 end
