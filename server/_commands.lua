@@ -17,8 +17,6 @@ end, false)
 
 -- ====================================================================================--
 
-TriggerEvent("chat:addSuggestion", "/switch", "Use to change your character(s).")
-
 RegisterCommand('switch', function(source, args, rawCommand)
     local src = tonumber(source)
     local Primary_ID = c.identifier(src)
@@ -36,10 +34,6 @@ end, true)
 
 -- ====================================================================================--
 
-TriggerEvent("chat:addSuggestion", "/ban", "Admin Permission(s) Required.", {
-    {name = "[1]", help ="Server ID"},
-})
-
 RegisterCommand('ban', function(source, args, rawCommand)
     local src = tonumber(source)
     if (args[1] == src) then
@@ -56,10 +50,6 @@ end, true)
 
 -- ====================================================================================--
 
-TriggerEvent("chat:addSuggestion", "/kick", "Admin Permission(s) Required.", {
-    {name = "[1]", help ="Server ID"},
-})
-
 RegisterCommand('kick', function(source, args, rawCommand)
     local src = tonumber(source)
     if (args[1] == src) then
@@ -73,19 +63,16 @@ end, true)
 
 -- ====================================================================================--
 
-TriggerEvent("chat:addSuggestion", "/setjob", "Admin Permission(s) Required.", {
-    {name = "[1]", help ="Server ID"},
-    {name = "[2]", help ="Job Name"},
-    {name = "[3]", help ="Job Grade"},
-})
-
 RegisterCommand('setjob', function(source, args, rawCommand)
     local src = tonumber(source)
     if c.job.Exist(args[2], args[3]) then
         local xPlayer = c.data.GetPlayer(args[1])
         xPlayer.SetJob(args[2], args[3])
+        print(table.concat(args,' '))
         TriggerClientEvent("Client:Notify", src, 'ID:'..args[1]..', JobName: '..args[2]..', JobGrade: '..args[3]..'.')
+        TriggerClientEvent("Client:Notify", args[1], 'ID:'..args[1]..', JobName: '..args[2]..', JobGrade: '..args[3]..'.')
     else
         TriggerClientEvent("Client:Notify", src, 'JobName: '..args[2]..' or JobGrade: '..args[3]..', does not exist.')
+        TriggerClientEvent("Client:Notify", args[1], 'ID:'..args[1]..', JobName: '..args[2]..', JobGrade: '..args[3]..'.')
     end
 end, true)

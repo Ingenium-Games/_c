@@ -204,12 +204,15 @@ function c.data.ServerSync()
     local function Do()
         c.sql.SaveUsers(function() 
             -- do 
+                Citizen.Wait(2500)
         end)
         c.sql.SaveVehicles(function() 
             -- do 
+                Citizen.Wait(2500)
         end)
         c.sql.SaveJobs(function() 
             -- do 
+                Citizen.Wait(2500)
         end)
         c.debug('[F] ServerSync() : Users, Vehicles, Jobs : [^5Saved^0].')
         print("     ^7[^5Saved^7]:  ==      (Users, Vehicles, Jobs)")
