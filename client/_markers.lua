@@ -103,7 +103,7 @@ Citizen.CreateThread(function()
       lastChunk = timeNow
       chunk = ReChunk()
     end
-    Citizen.Wait(1)
+    Citizen.Wait(0)
     DrawMarkers()
   end
 end)
@@ -181,7 +181,7 @@ function c.marker.CreateThreadLoop(t)
             local found = false
             local near = false
             local open = false
-            Citizen.Wait(1)
+            Citizen.Wait(0)
             if c.data.GetLoadedStatus() then
                 for i = 1, #tab, 1 do
                     local ords = tab[i].coords
