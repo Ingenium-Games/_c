@@ -102,7 +102,7 @@ AddEventHandler("Server:Bank:Deposit", function(data, req)
     local amount = data
     local xPlayer = c.data.GetPlayer(src)
     --
-    xPlayer.RemoveMoney(amount)
+    xPlayer.RemoveCash(amount)
     xPlayer.AddBank(amount)
     TriggerClientEvent("Client:Notify", xPlayer.ID, "Diposited $"..amount, "warn")
 end)
@@ -114,7 +114,7 @@ AddEventHandler("Server:Bank:Withdraw", function(data, req)
     local xPlayer = c.data.GetPlayer(src)
     --
     xPlayer.RemoveBank(amount)
-    xPlayer.AddMoney(amount)
+    xPlayer.AddCash(amount)
     TriggerClientEvent("Client:Notify", xPlayer.ID, "Withdrew $"..amount, "warn")
 end)
 

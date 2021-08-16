@@ -155,6 +155,8 @@ function c.marker.SelectMarker(v, ords)
         -- Small White Rotating Circle + Bouncing ? (on Ground)
         DrawMarker(27, ords[1], ords[2], ords[3] - 0.45, 0, 0, 0, 0, 0, 0, 0.4001, 0.4001, 0.4001, 240, 240, 240, 35, 0,
             0, 2, 1)
+        DrawMarker(32, ords[1], ords[2], ords[3], 0, 0, 0, 0, 0, 0, 0.7001, 1.0001, 0.3001, 240, 240, 240, 35, 1, 0, 2,
+          1)
     elseif v == 6 then
         DrawMarker(32, ords[1], ords[2], ords[3] - 0.45, 0, 0, 0, 0, 0, 0, 0.2001, 0.4001, 0.8001, 240, 240, 240, 35, 1,
             1, 2, 0)
