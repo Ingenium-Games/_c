@@ -68,6 +68,7 @@ AddEventHandler('Server:Character:Request:Create', function(first_name, last_nam
         City_ID = city,
         Phone = phone,
         Coords = json.encode(conf.spawn),
+        Job = json.encode(conf.default.job),
         Accounts = json.encode(conf.default.accounts),
         Modifiers = json.encode(conf.default.modifiers),
     }

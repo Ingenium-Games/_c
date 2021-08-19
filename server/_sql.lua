@@ -147,7 +147,7 @@ function c.sql.SetupJobs(cb)
                         ['@Description'] = v.Label.." : Description for role here.",
                         ['@Boss'] = "Not Owned",
                         ['@Members'] = json.encode({}),
-                        ['@Accounts'] = json.encode(conf.defaultjobaccounts),
+                        ['@Accounts'] = json.encode(conf.default.jobaccounts),
                     }, function(_data)
                         if _data then
                             --

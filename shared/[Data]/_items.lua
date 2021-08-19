@@ -1,9 +1,9 @@
 -- ====================================================================================--
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
-c.items = { -- table of items
-    --[[
-    Ok so this is the block of code for all you people to copy, paste, and prefill at the bottom of this page.
+--[[
+
+Ok so this is the block of code for all you people to copy, paste, and prefill at the bottom of this page.
 
     COPY START BELOW HERE!
 
@@ -58,7 +58,11 @@ c.items = { -- table of items
     Want to be different? - Find a cure for cancer cunt.
     I'll suck your dick if you do.
 
-    ]]--
+]]--
+
+-- ====================================================================================--
+
+c.items = { -- table of items
 
     ["Scorpion"] = {
         Name = "Scorpion",
@@ -109,3 +113,5 @@ c.items = { -- table of items
 
 
 }
+-- ====================================================================================--
+setmetatable(c.items, c.meta)

@@ -111,8 +111,6 @@ JOBS AND DEFAULTS
     -- Permit jobs to be able to go off duty to not get paid for service while online.
     -- The time taken serverside to do pay runs.
 ]]--
-conf.defaultjob = {["Name"] = "none", ["Grade"] = 1}
-conf.defaultjobaccounts = {["Bank"] = 25000, ["Safe"] = 0}
 conf.enablejobpayroll = true
 conf.enablejobcenter = true
 conf.enableduty = true

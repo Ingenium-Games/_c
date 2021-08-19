@@ -183,6 +183,9 @@ function c.data.CreateJobObjects()
             c.jdex[k] = c.class.CreateJob(v)
         end
     end
+    -- Lock the Jobs after DV Pull.
+    setmetatable(c.jobs,c.meta)
+    setmetatable(c.jdex,c.meta)
 end
 
 function c.data.GetJobs()
