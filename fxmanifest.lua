@@ -2,8 +2,8 @@
 fx_version "cerulean"
 game "gta5"
 author "Twiitchter"
-description "ore: A FiveM C-ORE Resource to BUILD WITH"
-version "0.6"
+description "c = exports.ore:c()"
+version "0.6.0"
 ------------------------------------------------------------------------------
 ui_page "nui/ore.html"
 loadscreen "https://www.ingenium.games/"
@@ -27,5 +27,5 @@ server_exports {"c"}
 dependencies {"mysql-async", "discordroles"}
 ------------------------------------------------------------------------------
 -- files
-files { "nui/ore.js", "nui/ore.css", "nui/ore.html", "nui/img/*.png", "nui/img/*.jpg", "nui/jquery-3.5.1.min.js",
+files {"version.json", "nui/ore.js", "nui/ore.css", "nui/ore.html", "nui/img/*.png", "nui/img/*.jpg", "nui/jquery-3.5.1.min.js",
        "nui/jquery.mask.min.js", "nui/jquery.validate.min.js"}

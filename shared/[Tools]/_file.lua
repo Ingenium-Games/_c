@@ -9,13 +9,13 @@ c.file = {}
 -- ====================================================================================--
 
 function c.file.Exists(file)
-    local f = io.open(GetResourcePath(GetCurrentResourceName()).."."..file..".json", "r")
+    local f = io.open(GetResourcePath(GetCurrentResourceName()..file..".json", "r")
     if f then f:close() end
     return f ~= nil
 end
 
 function c.file.Read(file)
-    local f = io.open(GetResourcePath(GetCurrentResourceName()).."."..file..".json", "r")
+    local f = io.open(GetResourcePath()..file..".json", "r")
     local content = f:read("a")
     f:close()
     return json.decode(content)
@@ -25,7 +25,7 @@ end
 function c.file.Write(file, content)
     assert(type(content) == "function", "Unable to write to file, cannot write functions to a JSON.")
     local steralize = json.encode(content)
-    local f = io.open(GetResourcePath(GetCurrentResourceName()).."."..file..".json",  "w+")
+    local f = io.open(GetResourcePath(GetCurrentResourceName()..file..".json",  "w+")
     f:write(steralize)
     f:flush()
     f:close()
