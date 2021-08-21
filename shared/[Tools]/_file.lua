@@ -8,7 +8,7 @@ c.file = {}
 -- ====================================================================================--
 
 function c.file.Exists(file)
-    local f = io.open(GetResourcePath(GetCurrentResourceName()..file, "r")
+    local f = io.open(GetResourcePath()..file, "r")
     if f then f:close() end
     return f ~= nil
 end
@@ -22,7 +22,7 @@ end
   
 -- Write a string to a file.
 function c.file.Write(file, content)
-    local f = io.open(GetResourcePath(GetCurrentResourceName()..file,  "w+")
+    local f = io.open(GetResourcePath()..file,  "w+")
     f:write(content)
     f:flush()
     f:close()
