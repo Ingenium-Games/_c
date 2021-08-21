@@ -44,6 +44,10 @@ function c.debug(str)
     end
 end
 
+function c.alert(str)
+    print("   ^7[^3Alert^7]:  ==    ", str)
+end
+
 -- ====================================================================================--
 
 --- Returns Primary_ID as set by conf.lua. String

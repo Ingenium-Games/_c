@@ -3,7 +3,7 @@ fx_version "cerulean"
 game "gta5"
 author "Twiitchter"
 description "c = exports.ore:c()"
-version "0.6.0"
+version "0.6.1"
 ------------------------------------------------------------------------------
 ui_page "nui/ore.html"
 loadscreen "https://www.ingenium.games/"

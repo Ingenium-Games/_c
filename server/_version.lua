@@ -1,18 +1,24 @@
 -- ====================================================================================--
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
---	
-local version = c.module.GetVersion()
-local OnlineVersion = nil
-
-PerformHttpRequest("https://github.com/Ingenium-Games/ore/version.txt", function(err, text, headers)
-    Citizen.Wait(1250)
-    OnlineVersion = text
-    --
-    c.debug(" ^0[ ^8Update Checking^0 ] ")
-    if (OnlineVersion ~= version) then
-        print("Wrong Version Installed.")
-    else
-        print(version.. " == " ..OnlineVersion)
-    end
-end, "GET")
+c.version = {}
+--
+function c.version.Check()
+    local version = c.module.GetVersion()
+    PerformHttpRequest("https://raw.githubusercontent.com/Ingenium-Games/ore/main/version.txt", function(err, text, headers)
+        --
+        c.debug(" ^0[ ^8UpdateCheck^0 ] ")
+        if (text ~= nil) then
+            if version == text then
+                c.debug("^0[ ^4Up-To-Date! ^0] ")
+            else
+                print("\n")
+                c.alert("[ Old : "..version.." ] ")
+                c.alert("[ New : "..text.." ] ")        
+                print("\n")
+            end
+        else
+            c.debug("Seems like there is an issue getting an updated version, Please tell me about this!")
+        end
+    end, "GET", "", "")
+end

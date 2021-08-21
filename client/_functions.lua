@@ -44,6 +44,10 @@ function c.debug(str)
     end
 end
 
+function c.alert(str)
+  print("   ^7[^3Alert^7]:  ==    ", str)
+end
+
 -- ====================================================================================--
 
 --- Preduce a Busy Spinner

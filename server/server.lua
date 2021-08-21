@@ -34,6 +34,11 @@ function OnStart()
     c.data.ServerSync()
     -- Start Paying players based on conf.
     c.job.PayCycle()  
+    --
+
+
+    -- AT THE END
+    c.version.Check()
 end
 -- ====================================================================================--
 RegisterNetEvent('Server:PlayerConnecting')

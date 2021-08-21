@@ -206,6 +206,10 @@ end
 
 -- ====================================================================================--
 
+function c.data.Save(str)
+    print("   ^7[^5Saved^7]:  ==    ", str)
+end
+
 -- Server to DB routine.
 function c.data.ServerSync()
     local function Do()
@@ -221,8 +225,8 @@ function c.data.ServerSync()
             -- do 
         end)
         Citizen.Wait(350)
-        c.debug('[F] ServerSync() : Users, Vehicles, Jobs : [^5Saved^0].')
-        print("     ^7[^5Saved^7]:  ==      (Users, Vehicles, Jobs)")
+        c.debug('[F] ServerSync()')
+        c.data.Save(" Users, Vehicles, Jobs, ")
         SetTimeout(conf.serversync, Do)
     end
     SetTimeout(conf.serversync, Do)
