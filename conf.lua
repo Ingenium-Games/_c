@@ -117,3 +117,4 @@ conf.enableduty = true
 conf.paycycle = conf.min * 15
 
 -- ====================================================================================--
+conf.urlversion = "https://raw.githubusercontent.com/Ingenium-Games/ore/main/version.txt"

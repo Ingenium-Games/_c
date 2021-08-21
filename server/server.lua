@@ -38,7 +38,7 @@ function OnStart()
 
 
     -- AT THE END
-    c.version.Check()
+    c.version.Check(conf.urlversion)
 end
 -- ====================================================================================--
 RegisterNetEvent('Server:PlayerConnecting')
