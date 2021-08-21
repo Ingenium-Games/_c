@@ -183,10 +183,6 @@ function c.data.CreateJobObjects()
             c.jdex[k] = c.class.CreateJob(v)
         end
     end
-    
-    -- Testing the save to file - Nice
-    -- c.file.Write('Test',c.jobs)
-
     -- Lock the Jobs after DV Pull.
     setmetatable(c.jobs,c.meta)
     setmetatable(c.jdex,c.meta)

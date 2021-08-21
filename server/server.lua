@@ -36,7 +36,6 @@ function OnStart()
     c.job.PayCycle()  
     --
 
-
     -- AT THE END
     c.version.Check(conf.urlversion)
 end

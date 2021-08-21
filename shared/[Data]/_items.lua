@@ -113,5 +113,6 @@ c.items = { -- table of items
 
 
 }
+c.json.Write("items", c.items)
 -- ====================================================================================--
 setmetatable(c.items, c.meta)
