@@ -213,15 +213,16 @@ function c.data.ServerSync()
         c.sql.SaveUsers(function() 
             -- do 
         end)
-        Citizen.Wait(350)
+        Citizen.Wait(conf.sec)
         c.sql.SaveVehicles(function() 
             -- do 
         end)
-        Citizen.Wait(350)
+        Citizen.Wait(conf.sec)
         c.sql.SaveJobs(function() 
             -- do 
         end)
-        Citizen.Wait(350)
+        Citizen.Wait(conf.sec)
+        --
         c.debug('[F] ServerSync()')
         c.data.Save("Users, Vehicles, Jobs, ")
         SetTimeout(conf.serversync, Do)
