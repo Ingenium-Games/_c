@@ -18,12 +18,15 @@ Ok so this is the block of code for all you people to copy, paste, and prefill a
         Weight = 4, -- Weight
         Weapon = "-1121678507", -- Becasue anything other than false or 0 is true. G G
         Meta = {    -- Any data you want, Weapons MUST have the three below.
+            Ammo = "9mm",
             SerialNumber = "",
             BatchNumber = "",
+            Crafted = false,
             Registered = false
         },
         Data = "",  -- Displayable string on inventory.
         Craftable = true,   -- can this be made? if so, add materials.
+        Recipe = true, -- require the know how
         Materials = {{
             ItemRequired = "Rubber",
             Quantity = 4
@@ -63,30 +66,68 @@ Ok so this is the block of code for all you people to copy, paste, and prefill a
 -- ====================================================================================--
 
 c.items = { -- table of items
-
-    ["Scorpion"] = {
-        Name = "Scorpion",
+    -- Weapons
+    ["SNS"] = {
+        Name = "SNS",
         Degrade = false,
         DegradeRate = 0.0,
         Quality = 100,
         Quantity = 1,
-        Cost = 960,
-        Value = 1650,
-        Weight = 5,
-        Weapon = "-1121678507",
+        Cost = 160,
+        Value = 324,
+        Weight = 1,
+        Weapon = "3218215474",
         Meta = {
+            Ammo = "9mm",
             SerialNumber = "",
             BatchNumber = "",
+            Crafted = false,
             Registered = false
         },
         Data = "",
         Craftable = true,
+        Recipe = true,
         Materials = {{
             ItemRequired = "Rubber",
-            Quantity = 4
+            Quantity = 2
+        }, {
+            ItemRequired = "PistolPin",
+            Quantity = 1
+        }, {
+            ItemRequired = "PistolFrame",
+            Quantity = 1
+        }},
+        Stackable = false,
+        Hotkey = true,
+        Image = "SNS.png",
+    },
+
+    ["Pistol"] = {
+        Name = "Pistol",
+        Degrade = false,
+        DegradeRate = 0.0,
+        Quality = 100,
+        Quantity = 1,
+        Cost = 285,
+        Value = 425,
+        Weight = 3,
+        Weapon = "-1075685676",
+        Meta = {
+            Ammo = "9mm",
+            SerialNumber = "",
+            BatchNumber = "",
+            Crafted = false,
+            Registered = false
+        },
+        Data = "",
+        Craftable = true,
+        Recipe = true,
+        Materials = {{
+            ItemRequired = "Rubber",
+            Quantity = 2
         }, {
             ItemRequired = "CarbonAlloy",
-            Quantity = 2
+            Quantity = 1
         }, {
             ItemRequired = "ShortBarrel",
             Quantity = 1
@@ -97,12 +138,12 @@ c.items = { -- table of items
             ItemRequired = "PistolFrame",
             Quantity = 1
         }, {
-            ItemRequired = "AutoReciever",
+            ItemRequired = "Reciever",
             Quantity = 1
         }},
         Stackable = false,
-        Hotkey = false,
-        Image = "Scorpion.png",
+        Hotkey = true,
+        Image = "Pistol.png",
     },
 
 
