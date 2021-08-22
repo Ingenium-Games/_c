@@ -10,15 +10,15 @@ c.json = {}
 
 function c.json.Exists(file)
     local f = io.open(GetResourcePath(GetCurrentResourceName()).."/"..file..".json", "r")
-    if f then f:close() end
-    return f ~= nil
+    if f then f:close() f = true else f = false end
+    return f
 end
 
 function c.json.Read(file)
     local f = io.open(GetResourcePath(GetCurrentResourceName()).."/"..file..".json", "r")
     local content = f:read("a")
     f:close()
-    return json.decode(content)
+    return json.decode(content) ~= nil
 end
   
 -- Write a string to a file.
