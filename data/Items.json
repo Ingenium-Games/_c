@@ -1,0 +1,63 @@
+{
+  "SNS": {
+    "Cost": 160,
+    "Meta": {
+      "Ammo": "9mm",
+      "SerialNumber": "",
+      "BatchNumber": "",
+      "Registered": false,
+      "Crafted": false
+    },
+    "Recipe": true,
+    "Data": "",
+    "Weapon": "3218215474",
+    "Weight": 1,
+    "Quality": 100,
+    "Image": "SNS.png",
+    "DegradeRate": 0.0,
+    "Name": "SNS",
+    "Degrade": false,
+    "Materials": [
+      { "Quantity": 2, "ItemRequired": "Rubber" },
+      { "Quantity": 1, "ItemRequired": "PistolPin" },
+      { "Quantity": 1, "ItemRequired": "PistolFrame" }
+    ],
+    "Stackable": false,
+    "Hotkey": true,
+    "Craftable": true,
+    "Value": 324,
+    "Quantity": 1
+  },
+  "Pistol": {
+    "Cost": 285,
+    "Meta": {
+      "Ammo": "9mm",
+      "SerialNumber": "",
+      "BatchNumber": "",
+      "Registered": false,
+      "Crafted": false
+    },
+    "Recipe": true,
+    "Data": "",
+    "Weapon": "-1075685676",
+    "Weight": 3,
+    "Quality": 100,
+    "Image": "Pistol.png",
+    "DegradeRate": 0.0,
+    "Name": "Pistol",
+    "Degrade": false,
+    "Materials": [
+      { "Quantity": 2, "ItemRequired": "Rubber" },
+      { "Quantity": 1, "ItemRequired": "CarbonAlloy" },
+      { "Quantity": 1, "ItemRequired": "ShortBarrel" },
+      { "Quantity": 1, "ItemRequired": "PistolPin" },
+      { "Quantity": 1, "ItemRequired": "PistolFrame" },
+      { "Quantity": 1, "ItemRequired": "Reciever" }
+    ],
+    "Stackable": false,
+    "Hotkey": true,
+    "Craftable": true,
+    "Value": 425,
+    "Quantity": 1
+  }
+}

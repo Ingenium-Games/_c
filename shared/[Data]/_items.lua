@@ -66,7 +66,9 @@ Ok so this is the block of code for all you people to copy, paste, and prefill a
 -- ====================================================================================--
 
 c.items = { -- table of items
-    -- Weapons
+
+-- Weapons
+
     ["SNS"] = {
         Name = "SNS",
         Degrade = false,

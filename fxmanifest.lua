@@ -29,3 +29,5 @@ dependencies {"mysql-async", "discordroles"}
 -- files
 files {"nui/ore.js", "nui/ore.css", "nui/ore.html", "nui/img/*.png", "nui/img/*.jpg", "nui/jquery-3.5.1.min.js",
        "nui/jquery.mask.min.js", "nui/jquery.validate.min.js"}
+
+data {"data/Jobs.json", "data/Drops.json", "data/GSR.json", "data/Items.json", "data/Notes.json", "data/Pickups.json"}
