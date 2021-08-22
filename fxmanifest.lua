@@ -9,13 +9,13 @@ ui_page "nui/ore.html"
 loadscreen "https://www.ingenium.games/"
 ------------------------------------------------------------------------------
 -- shared
-shared_scripts {"conf.lua", "conf.default.lua", "conf.cars.lua", "conf.disable.lua", "shared/_c.lua"}
+shared_scripts {"conf.lua", "conf.default.lua", "conf.cars.lua", "conf.disable.lua", "conf.file.lua", "shared/_c.lua"}
 ------------------------------------------------------------------------------
 -- client
 client_scripts {"client/_var.lua", "shared/[Tools]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "client/_functions.lua", "client/**/*.lua", "client/**/*.js"}
 ------------------------------------------------------------------------------
 -- server
-server_scripts {"@mysql-async/lib/MySQL.lua", "server/_var.lua", "shared/[Tools]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "server/_functions.lua", "server/**/*.lua", "server/**/*.js"}
+server_scripts {"@mysql-async/lib/MySQL.lua", "server/_var.lua", "shared/[Tools]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "server/[Files]/*.lua", "server/_functions.lua", "server/**/*.lua", "server/**/*.js"}
 ------------------------------------------------------------------------------
 -- client exports
 exports {"c"}

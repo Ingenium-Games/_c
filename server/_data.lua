@@ -46,7 +46,7 @@ function c.data.Initilize()
         c.data.CreateJobObjects()
         cb()
         --
-        c.data.DataFiles()
+        LoadDataFiles()
         cb()
         --
         loaded = true
@@ -64,7 +64,6 @@ function c.data.Initilize()
     -- print(c.table.Dump(c.jobs))
 
 end
-
 -- ====================================================================================--
 
 --- Adds player to the player index.
@@ -186,7 +185,7 @@ function c.data.CreateJobObjects()
             c.jdex[k] = c.class.CreateJob(v)
         end
     end
-    c.json.Write("jobs", c.jobs)
+    c.json.Write(conf.file.jobs, c.jobs)
     -- Lock the Jobs after DV Pull.
     setmetatable(c.jobs,c.meta)
     setmetatable(c.jdex,c.meta)
