@@ -10,8 +10,12 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
     
-function c.data.CleanDataFiles()
-    -- We should probably stagger these to prevent multiple files opena and writing.
+function c.data.DataFiles()
+    c.gsr.Load()
+    c.drop.Load()
+    c.pick.Load()
+    c.note.Load()
+    --
     c.gsr.CleanUp()
     Citizen.Wait(c.min)
     --

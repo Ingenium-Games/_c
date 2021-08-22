@@ -23,7 +23,7 @@ function c.data.Initilize()
         [3] = 'DB: Finding Job Accounts or Creating them;',
         [4] = 'DB: Job Accounts have been Generated;',
         [5] = 'DB: Job Objects Created and Added;',
-        [6] = 'DB: Vehicles;'
+        [6] = 'DB: Loading Data Files - Drops, Pickups, Notes, GSR;'
     }
     --
     local function cb()
@@ -44,6 +44,9 @@ function c.data.Initilize()
         c.sql.GrabJobAccounts(cb)
         -- [5] -- Not so much a SQL function, but dependant on it being conducted in order.
         c.data.CreateJobObjects()
+        cb()
+        --
+        c.data.DataFiles()
         cb()
         --
         loaded = true
