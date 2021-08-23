@@ -1,10 +1,35 @@
-# Putting the (c).ore in FiveM : [ORE] c = exports.c:ore()
+# Putting the c.ore in FiveM : Resource [ORE] c = exports.c:ore() 
+
+Please use the [ORE] in the title on the FiveM Forums if posting resources made with this core and use the tag "ore"
 
 <br>
 
-## Start
-As with all source code on the internet, please review and use at your own peril.
-This is intended to be used by people getting started within FiveM and to be somewhat user friendly.
+>##### Note: As with all source code on the internet, please review prior to blindly using...
+
+<br>
+<br>
+
+
+## Overview
+
+<br>
+
+>##### This is a work of constant development and change, some functions may break or change on the way to release.
+
+<br>
+
+This is intended to be used by people getting started within FiveM and to be somewhat user friendly, but also for the more advanced users or developers too.
+
+It is a learning experiance getting started with native functions, runtime issues, differances with NUI/DUI, but if you perservere, you will end up making something enjoyable for yourself and __hopefully__ others.
+
+Just try and have fun.
+
+<br>
+<br>
+
+## Getting Started
+
+<br>
 
 Please make sure you have had a read of how to setup a server from the [FiveM Docs](https://docs.fivem.net/docs/), use this as a referance point for both native function useage as well as finding out how things work within their runtime.
 
@@ -16,34 +41,34 @@ But the basics are:
 - Have Fun!
 
 
-A general getting started guide will be under construction soon;
+A general getting started guide will be on the wiki as mentioned below.
 
 <br>
 
-#### Note:
-__*Please only use a linux build server if you are comfortable in development.*__
+>##### Note: *Please only use a linux build server if you are comfortable in development. It does not have features that assist with debugging and troubleshooting for the [CFX.re](https://cfx.re/) team.*
 
-It does not have features that assist with debugging and troubleshooting for the CFX.re team.
+<br>
+<br>
+
+## [Wiki](https://github.com/Ingenium-Games/ore/wiki)
 
 <br>
 
-## Wiki
+The [Wiki](https://github.com/Ingenium-Games/ore/wiki) contains a breif overview of functions and events that operate within the core to assist in leveraging for your own works.
 
-I am working on a wiki to showcase what funcitons do what for those that dont want to read the comments in the code.
+It will also contain a guide on how to get started ad eventually a way to import a pre-made server as apart of the TxAdmin web panel as a recipe.
 
-TBC
-
-<br>
-
-## Overview
-This is a work of constant development and change, please be advised some functions may break or change on the way to release.
-
-
+This is still very much a work in progress
 
 
 <br>
+<br>
 
-## Code
+## Code Formatting
+
+<br>
+
+An attempt to be as consistant as possible has been made following the below as a set of rough indicators to assist with reading over code blocks,
 
 <br>
 
@@ -82,14 +107,24 @@ INSERT INTO `job_accounts` (`Name`, `Description`, `Boss`, `Members`, `Accounts`
 ```
 - Use Parameters within the mysql-async resource.
 ```lua
-local data = Data being added
-MySQL.Async.execute("INSERT `table` .... `Column1` = @data" ... ;", {["@data"] = data}, function(r) end)
+local data = "xyz"
+MySQL.Async.execute("INSERT `table` .... `Column1` = @data WHERE X=X;", {
+["@data"] = data
+},function(r) 
+    -- do
+end)
 ```
-- Do not do __*this shit!*__
+- __*Do not do this!*__
 ```lua
-local data = Data being added
-MySQL.Async.execute("INSERT `table` .... `Column1` = "..data.." ... ;" etc...)
+local data = "Cool Story Bro"
+MySQL.Async.execute("INSERT `table` .... `Column1` = "..data..";",{
+
+},function(r) 
+    -- do
+end)
 ```
+
+>##### Note: *If you see anyone doing the above, it can probably be exploited in a way to ruin your database.* __*Always pass parameters correctly*__
 
 <br>
 
@@ -97,7 +132,7 @@ MySQL.Async.execute("INSERT `table` .... `Column1` = "..data.." ... ;" etc...)
 
 <br>
 
-I have yet to figure out wha thte ufck I am doing.
+>I need to figure out my style..
 
 <br>
 
@@ -105,26 +140,33 @@ I have yet to figure out wha thte ufck I am doing.
 
 <br>
 
-I have yet to figure out wha thte ufck I am doing.
+>I need to figure out my style..
 
 <br>
 
 <br>
 
-## Tested
-__Tested on:__
-- Windows Server 
-- CentOS 8 Stream
+
 
 <br>
 
-##### If you seek to profit, sell, include or use secitons of code, please include the full license as shown herein
+<br>
+
+>Note: *It has currently been tested and working on the following server operating systems with no issues present. __As you would hopefully expect!__*
+>- Windows Server (64bit)
+>- CentOS 8 Stream (64bit) - RHEL Distro
+
+<br>
+<br>
+<br>
+
+>##### If you seek to profit, sell, include or use secitons of code, please include the full license as shown herein
 
 <br>
 
 ## MIT License (MIT)
 
-**Copyright (c) 2021 : Twiitchter, on behalf of https://github.com/Ingenium-Games**
+**Copyright (c) 2021 : Twiitchter - https://github.com/Ingenium-Games**
 
 *Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:*
 
