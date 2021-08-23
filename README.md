@@ -132,6 +132,27 @@ end)
 
 <br>
 
+```js
+let variable = 42
+```
+
+
+```js
+function SameSameA() {};
+```
+
+
+```js
+// function descriptions
+// @param var type "Context"
+function SameSameB(var) {
+  If (var != "xyz") {
+    console.log("var is not xyz")
+  };
+};
+```
+
+
 >I need to figure out my style..
 
 <br>
