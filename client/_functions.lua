@@ -28,11 +28,11 @@ end
 
 function c.error(err)
     if conf.error then
-        if type(err) == 'string' then
+        if type(err) == "string" then
             print("   ^7[^3Error^7]:  ==    ", err)
             print(debug.traceback(_, 2))
         else
-            print("   ^7[^3Error^7]:  ==    ", 'Unable to type(err) == string. [err] = ', err)
+            print("   ^7[^3Error^7]:  ==    ", "Unable to type(err) == string. [err] = ", err)
             print(debug.traceback(_, 2))
         end
     end
@@ -52,7 +52,7 @@ end
 
 --- Preduce a Busy Spinner
 function c.IsBusy()
-    BeginTextCommandBusyspinnerOn('FM_COR_AUTOD')
+    BeginTextCommandBusyspinnerOn("FM_COR_AUTOD")
     EndTextCommandBusyspinnerOn(5)
 end
 
@@ -64,7 +64,7 @@ end
 
 --- Produce a Busy Spinner with a "Please Wait"
 function c.PleaseWait()
-    BeginTextCommandBusyspinnerOn('PM_WAIT')
+    BeginTextCommandBusyspinnerOn("PM_WAIT")
     EndTextCommandBusyspinnerOn(5)
 end
 
@@ -80,7 +80,7 @@ end
 
 -- ====================================================================================--
 
---- Return the Entity's state bag.
+--- Return the Entity"s state bag.
 ---@param entity any "Typically a number or string"
 function c.GetEntity(entity)
     return Entity(entity).state
@@ -92,21 +92,21 @@ end
 function c.IsNear(coords, arrays, style)
     local dstchecked = 1000
     local pos = coords
-	for i = 1, #arrays do
-		local ords = arrays[i]
-		local comparedst = Vdist(pos - ords)
-		if comparedst < dstchecked then
-			dstchecked = comparedst
-		end
-		if comparedst < 5.0 then
-            if style then
-                c.marker.SelectMarker(style, ords)
-            else
-                c.marker.SelectMarker(1, ords)
+	  for i = 1, #arrays do
+		    local ords = arrays[i]
+		    local comparedst = Vdist(pos - ords)
+		    if comparedst < dstchecked then
+			      dstchecked = comparedst
+		    end
+		        if comparedst < 10.0 then
+                if style then
+                    c.marker.SelectMarker(style, ords)
+                else
+                    c.marker.SelectMarker(1, ords)
+                end
             end
-        end
-	end
-	return dstchecked
+	      end
+	  return dstchecked
 end
 
 --- Returns Players within the designated radius.
@@ -115,7 +115,7 @@ end
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.GetPlayersInArea(ords, radius, minimal)
     local coords = vector3(ords)
-    local objs = GetGamePool('CPed')
+    local objs = GetGamePool("CPed")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
@@ -148,7 +148,7 @@ end
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.GetPedsInArea(ords, radius, minimal)
     local coords = vector3(ords)
-    local objs = GetGamePool('CPed')
+    local objs = GetGamePool("CPed")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
@@ -177,7 +177,7 @@ end
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.GetObjectsInArea(ords, radius, minimal)
     local coords = vector3(ords)
-    local objs = GetGamePool('CObject')
+    local objs = GetGamePool("CObject")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
@@ -206,7 +206,7 @@ end
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.GetVehiclesInArea(ords, radius, minimal)
     local coords = vector3(ords)
-    local objs = GetGamePool('CVehicle')
+    local objs = GetGamePool("CVehicle")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
@@ -235,7 +235,7 @@ end
 ---@param minimal boolean "Return just the found objects or their model and coords as well?"
 function c.GetPickupsInArea(coords, radius, minimal)
     local coords = vector3(ords)
-    local objs = GetGamePool('CPickup')
+    local objs = GetGamePool("CPickup")
     local obj = {}
     if minimal then
         for _, v in pairs(objs) do
@@ -322,7 +322,7 @@ function c.Keyboard(TextEntry, ExampleText, MaxStringLenght)
 	-- ExampleText		-->	An Example Text, what it should say in the typing field
 	-- MaxStringLenght	-->	Maximum String Lenght
 
-	AddTextEntry('FMMC_KEY_TIP1', TextEntry) --Sets the Text above the typing field in the black square
+	AddTextEntry("FMMC_KEY_TIP1", TextEntry) --Sets the Text above the typing field in the black square
 	DisplayOnscreenKeyboard(1, "FMMC_KEY_TIP1", "", ExampleText, "", "", "", MaxStringLenght) --Actually calls the Keyboard Input
 	blockinput = true --Blocks new input while typing if **blockinput** is used
 
@@ -332,11 +332,11 @@ function c.Keyboard(TextEntry, ExampleText, MaxStringLenght)
 		
 	if UpdateOnscreenKeyboard() ~= 2 then
 		local result = GetOnscreenKeyboardResult() --Gets the result of the typing
-		Citizen.Wait(500) --Little Time Delay, so the Keyboard won't open again if you press enter to finish the typing
+		Citizen.Wait(500) --Little Time Delay, so the Keyboard won"t open again if you press enter to finish the typing
 		blockinput = false --This unblocks new Input when typing is done
 		return result --Returns the result
 	else
-		Citizen.Wait(500) --Little Time Delay, so the Keyboard won't open again if you press enter to finish the typing
+		Citizen.Wait(500) --Little Time Delay, so the Keyboard won"t open again if you press enter to finish the typing
 		blockinput = false --This unblocks new Input when typing is done
 		return nil --Returns nil if the typing got aborted
 	end
@@ -684,27 +684,27 @@ function c.GetVehicleCondition(vehicle)
   local wheels = {}
   for i=1, numwheels, 0 do
     wheels[i] = {
-      ['Burst'] = IsVehicleTyreBurst(vehicle, i, false),
-      ['Gone'] = DoesVehicleTyreExist(vehicle, i),
-      ['Tyre'] = GetTyreHealth(vehicle, i),
-      ['Wheel'] = GetVehicleWheelHealth(vehicle, i),
+      ["Burst"] = IsVehicleTyreBurst(vehicle, i, false),
+      ["Gone"] = DoesVehicleTyreExist(vehicle, i),
+      ["Tyre"] = GetTyreHealth(vehicle, i),
+      ["Wheel"] = GetVehicleWheelHealth(vehicle, i),
     }
   end
   local numdoors = GetNumberOfVehicleDoors(vehicle)
   local doors = {}
   for i=1, numdoors, 0 do
     doors[i] = {
-      ['ConValid'] = GetIsDoorValid(vehicle, i),
-      ['ConDamaged'] = IsVehicleDoorDamaged(vehicle, i),
+      ["ConValid"] = GetIsDoorValid(vehicle, i),
+      ["ConDamaged"] = IsVehicleDoorDamaged(vehicle, i),
     }
   end
   --
   return {
-    ['Wheels'] = wheels,
-    ['Doors'] = doors,
-    ['Eng'] = GetVehicleEngineHealth(vehicle),
-    ['Tank'] = GetVehiclePetrolTankHealth(vehicle),
-    ['Body'] = GetVehicleBodyHealth(vehicle),
+    ["Wheels"] = wheels,
+    ["Doors"] = doors,
+    ["Eng"] = GetVehicleEngineHealth(vehicle),
+    ["Tank"] = GetVehiclePetrolTankHealth(vehicle),
+    ["Body"] = GetVehicleBodyHealth(vehicle),
   }
 end
 
@@ -721,7 +721,7 @@ function c.SetVehicleCondition(vehicle, cons)
   end
   if cons.Wheels ~= nil then
     for i=1, #cons.Wheels, 0 do
-      local a,b = cons.Wheels[i]['Gone'], cons.Wheels[i]['Burst']
+      local a,b = cons.Wheels[i]["Gone"], cons.Wheels[i]["Burst"]
       if a and b then
         SetVehicleTyreBurst(vehicle, i, true, 1000.0)
       elseif not a and b then
@@ -729,13 +729,13 @@ function c.SetVehicleCondition(vehicle, cons)
       elseif not a or b then
         SetVehicleTyreFixed(vehicle, i)
       end
-      SetVehicleWheelHealth(vehicle, i, cons.Wheels[i]['Wheel'])
-      SetTyreHealth(vehicle, i, cons.Wheels[i]['Tyre'])
+      SetVehicleWheelHealth(vehicle, i, cons.Wheels[i]["Wheel"])
+      SetTyreHealth(vehicle, i, cons.Wheels[i]["Tyre"])
     end
   end
   if cons.Doors ~= nil then
     for i=1, #cons.Doors, 0 do
-      local a,b = cons.Doors[i]['ConValid'], cons.Doors[i]['ConDamaged']
+      local a,b = cons.Doors[i]["ConValid"], cons.Doors[i]["ConDamaged"]
       if a and b then
         SetVehicleDoorBroken(vehicle, i, true)
       elseif a or b then
