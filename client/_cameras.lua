@@ -62,3 +62,7 @@ function c.camera.Advanced(type, px, py, pz, rx, ry, rz, fov)
     name = CreateCamWithParams(type, px, py, pz, rx, ry, rz, fov, false, 0)
     return name
 end
+
+function c.camera.CleanUp(camera)
+    table.remove(c.cameras, camera)
+end
