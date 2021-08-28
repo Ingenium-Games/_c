@@ -118,7 +118,7 @@ conf.paycycle = conf.min * 15
 
 -- ====================================================================================--
 conf.url = {}
-conf.url.version = "https://raw.githubusercontent.com/Ingenium-Games/ore/main/version.txt"
+conf.url.version = "https://raw.githubusercontent.com/Ingenium-Games/ig.core/main/version.txt"
 
 
 
