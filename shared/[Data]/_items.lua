@@ -156,6 +156,10 @@ c.items = { -- table of items
 
 
 }
-c.json.Write(conf.file.items, c.items)
+
+-- if server
+if IsDuplicityVersion() then
+    c.json.Write(conf.file.items, c.items)
+end
 -- ====================================================================================--
 setmetatable(c.items, c.meta)
