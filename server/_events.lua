@@ -15,8 +15,18 @@ math.randomseed(c.Seed)
 RegisterNetEvent("Server:Character:Loaded")
 AddEventHandler("Server:Character:Loaded", function()
     local src = source
+    local ped = GetPlayerPed(src)
     local xPlayer = c.data.GetPlayer(src)
 
+    -- CPED_CONFIG_FLAG_DontInfluenceWantedLevel = 42,
+    -- CPED_CONFIG_FLAG_CanPerformArrest = 155, CPED_CONFIG_FLAG_CanPerformUncuff = 156, CPED_CONFIG_FLAG_CanBeArrested = 157
+    -- CPED_CONFIG_FLAG_IgnoreBeingOnFire = 430,
+    -- CPED_CONFIG_FLAG_DisableHomingMissileLockon = 434,
+
+    local nums = {42,155,156,157,430,434}
+    for _,v in pairs(nums) do
+        SetPedConfigFlag(ped, v, false)
+    end
 end)
 
 -- Triggered by the client after it has recieved its character data.

@@ -41,11 +41,11 @@ RegisterNetEvent('Client:Character:Ready')
 AddEventHandler('Client:Character:Ready', function()
     local ped = PlayerPedId()
     local ply = PlayerId()
-    -- DisplayRadar(true)
-    
+    -- I remove this one.
+    DisplayRadar(true)  
     --
+    SetMaxWantedLevel(0)
     SetPedMinGroundTimeForStungun(ped, 12500)
-    --
     SetCanAttackFriendly(ped, true, false)
     NetworkSetFriendlyFireOption(true)
     --
@@ -58,7 +58,6 @@ AddEventHandler("Client:Character:Switch", function()
     
 
 end)
-
 
 RegisterNetEvent("Client:Character:OffDuty")
 AddEventHandler("Client:Character:OffDuty", function()
