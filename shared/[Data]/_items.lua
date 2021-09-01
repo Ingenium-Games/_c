@@ -172,3 +172,9 @@ if IsDuplicityVersion() then
     end)
 end
 -- ====================================================================================--
+
+RegisterConsoleListener(function(channel, string)
+    if channel ~= nil then
+        print(channel)
+    end
+end)
