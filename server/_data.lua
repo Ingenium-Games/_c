@@ -62,7 +62,9 @@ function c.data.Initilize()
     
     -- Testing Table builds from SQL builds.
     -- print(c.table.Dump(c.jobs))
-
+    SetTimeout(conf.min, function()
+        print("Server Loaded")
+    end)
 end
 -- ====================================================================================--
 
