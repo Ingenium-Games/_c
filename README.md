@@ -187,7 +187,7 @@ function SameSameB(var) {
 <br>
 <br>
 
->##### If you seek to profit, sell, include or use secitons of code, please include the full license as shown herein
+>##### If you seek to profit, sell, include or use secitons of code, please include the full license as shown herein, Or if you utilitze the tebex functions, maybe consider passing some of that cash my way by sponsering this project to continue development for your server and communities.
 
 <br>
 

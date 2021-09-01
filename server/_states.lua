@@ -18,7 +18,7 @@ math.randomseed(c.Seed)
 ---@param value number "You feel your stomach ache a little."
 ---@param effect function "Any change to the screen on the users end"
 ---@param action function "Any change to the screen on the users end"
-function c.state.AddState(name, description, value, effects, actions)
+function c.state.AddState(name, value, description, effects, actions)
     if not c.states[name] then
         table.insert(c.states, name)
         value = {["description"] = description, ["effect"] = effects or nil, ["action"] = actions or nil}
@@ -80,6 +80,9 @@ function c.state.UpdateStates(source)
         Currently only the Thirst, Hunger and Stress Modifers will Imapct
         The user based on these states, the states will provide a message to the user,
         And Trigger their side, be it vision, recoil, speed or other factors and impact the fuck out of them.
+        Think of them like buffs or nerfs?
+        Hell if anyone wanyed to make an nui panel for buffs or nerfs, that would be cool asf.
+
     ]]--
 
 
@@ -87,11 +90,26 @@ function c.state.UpdateStates(source)
 end
 
 --[[
-    Example of adding states for all 9 levels of hunger and thirst.
+    Example of adding states for all 1-10 levels of hunger and thirst and stress,
+    Note, the effect or action can be a function to alter stuff. be creative. if no function is present nothing will occour, 
+    so the below will just display once the users status updates from the client side modifier update from the server packet. 
 ]]--
 
 local H = {[1] = {"Is that a cookie?"}, [2] = {"Feeling peckish"}, [3] = {"Could go a snack"},[4] = {"Feeling slightly hungry"}, [5] = {"I missed lunch.."}, [6] = {"Getting really hungry"}, [7] = {"Famished"}, [8] = {"Starving"}, [9] = {"Are you food?"}, [10] = {"Malnurished"}}
 
-local T = {[1] = {""}, [2] = {""}, [3] = {""},[4] = {""}, [5] = {""}, [6] = {""},[7] = {""}, [8] = {""}, [9] = {""}, [10] = {""}}
+local T = {[1] = {"",function() print('this is a effect') end, function() print('this is a action') end}, [2] = {""}, [3] = {""},[4] = {""}, [5] = {""}, [6] = {""},[7] = {""}, [8] = {""}, [9] = {""}, [10] = {""}}
 
 local S = {[1] = {""}, [2] = {""}, [3] = {""},[4] = {""}, [5] = {""}, [6] = {""},[7] = {""}, [8] = {""}, [9] = {""}, [10] = {""}}
+
+for k,v in pairs(H) do
+    c.state.AddState("Hunger", k, H[v][1] or nil, H[v][2] or nil, H[v][3] or nil)
+end
+
+for k,v in pairs(T) do
+    c.state.AddState("Thirst", k, T[v][1] or nil, T[v][2] or nil, T[v][3] or nil)
+end
+
+for k,v in pairs(S) do
+    c.state.AddState("Stress", k, S[v][1] or nil, S[v][2] or nil, S[v][3] or nil)
+end
+
