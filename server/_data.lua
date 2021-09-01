@@ -59,11 +59,14 @@ function c.data.Initilize()
     c.Loading = false
     c.debug('Loading Sequence Complete.')
     c.Running = true
-    
+
     -- Testing Table builds from SQL builds.
     -- print(c.table.Dump(c.jobs))
-    SetTimeout(conf.min, function()
-        print("Server Loaded")
+    
+    -- this is to test the table locker function.
+    conf.temp = c.rng.chars(10)    
+    SetTimeout(c.min, function()
+        print(conf.temp)
     end)
 end
 -- ====================================================================================--
