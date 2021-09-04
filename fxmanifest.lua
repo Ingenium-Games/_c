@@ -3,7 +3,7 @@ fx_version "cerulean"
 game "gta5"
 author "Twiitchter"
 description 'c = exports["ig.core"]:c()'
-version "0.6.3"
+version "0.6.5"
 ------------------------------------------------------------------------------
 ui_page "nui/ig.core.html"
 loadscreen "https://www.ingenium.games/"
@@ -12,10 +12,10 @@ loadscreen "https://www.ingenium.games/"
 shared_scripts {"conf.lua", "conf.default.lua", "conf.cars.lua", "conf.disable.lua", "conf.file.lua", "shared/_c.lua"}
 ------------------------------------------------------------------------------
 -- client
-client_scripts {"client/_var.lua", "shared/[Tools]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "client/_functions.lua", "client/**/*.lua", "client/**/*.js"}
+client_scripts {"client/_var.lua", "shared/[Tools]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "client/_functions.lua", "client/**/*.lua"}
 ------------------------------------------------------------------------------
 -- server
-server_scripts {"@mysql-async/lib/MySQL.lua", "server/_var.lua", "shared/[Tools]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "server/[Files]/*.lua", "server/_functions.lua", "server/**/*.lua", "server/**/*.js"}
+server_scripts {"@mysql-async/lib/MySQL.lua", "server/_var.lua", "shared/[Tools]/*.lua", "shared/[Data]/_meta.lua", "shared/[Data]/*.lua", "server/_functions.lua", "server/**/*.lua"}
 ------------------------------------------------------------------------------
 -- client exports
 exports {"c"}
