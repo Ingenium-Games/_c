@@ -50,20 +50,25 @@ end
 ---@param name string "The name of the State"
 ---@param value number "The number of the State containing values"
 function c.state.TriggerState(name, value)
-    c.state.TriggerEvent(name,value)
+    c.state.TriggerEffect(name,value)
     c.state.TriggerAction(name,value)
 end
 
-function c.state.TriggerEvent(name,value)
-    c.states[name][value].event()
+function c.state.TriggerEffect(name,value)
+    if c.states[name][value].effect then
+        c.states[name][value].effect()
+    end
 end
 
 function c.state.TriggerAction(name,value)
-    c.states[name][value].action()
+    if c.states[name][value].action then
+        c.states[name][value].action()
+    end
 end
 
 function c.state.UpdateStates(source)
-    local xPlayer = c.data.GetPlayer()
+    local src = source
+    local xPlayer = c.data.GetPlayer(src)
     local mods = xPlayer.GetModifiers()    
     local oldmods = xPlayer.GetOldModifiers()
 
