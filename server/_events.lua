@@ -271,3 +271,10 @@ AddEventHandler("Server:EnteringAborted", function()
 end)
 
 
+RegisterNetEvent("Server:Create:Vehicle")
+AddEventHandler("Server:Create:Vehicle", function(name, coords)
+    local src = tonumber(source)
+    TriggerClientEvent("Client:Notify", src, coords.x..","..coords.y..",".. coords.z..","..coords.h)
+    local retval, id = c.CreateVehicle(name, coords.x, coords.y, coords.z, coords.h)
+    TriggerClientEvent("Client:Notify", src, 'Spawned: '..retval..', NetID: '..id)
+end)

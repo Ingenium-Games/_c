@@ -13,7 +13,7 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-RegisterCommand('cross', function()
+RegisterCommand('cross', function(source, args, rawCommand)
     TriggerEvent("Client:Animation.CrossedArms", true, GetPlayerPed(-1))
 end, false)
 TriggerEvent("chat:removeSuggestion", "/cross")
@@ -21,7 +21,7 @@ RegisterKeyMapping('cross', 'Cross arms', 'keyboard', 'NumPad1')
 
 -- ====================================================================================--
 
-RegisterCommand('hands', function()
+RegisterCommand('hands', function(source, args, rawCommand)
     TriggerEvent("Client:Animation.HandsUp", true, GetPlayerPed(-1))
 end, false)
 TriggerEvent("chat:removeSuggestion", "/hands")
@@ -29,7 +29,7 @@ RegisterKeyMapping('hands', 'Hands Up', 'keyboard', 'NumPad2')
 
 -- ====================================================================================--
 
-RegisterCommand('armhold', function()
+RegisterCommand('armhold', function(source, args, rawCommand)
     TriggerEvent("Client:Animation.ArmHold", true, GetPlayerPed(-1))
 end, false)
 TriggerEvent("chat:removeSuggestion", "/armhold")
@@ -61,3 +61,10 @@ if IsPlayerFreeAiming(PlayerId()) then
 
 end
 ]]--
+
+RegisterCommand('car', function(source, args, rawCommand)
+    local pos = GetEntityCoords(PlayerPedId())
+    local heading = GetEntityHeading(PlayerPedId())
+    local coords = vec(table.unpack(pos),heading)
+    TriggerServerEvent("Server:Create:Vehicle", args[1], coords)
+end, false)
