@@ -65,6 +65,6 @@ end
 RegisterCommand('car', function(source, args, rawCommand)
     local pos = GetEntityCoords(PlayerPedId())
     local heading = GetEntityHeading(PlayerPedId())
-    local coords = vec(table.unpack(pos),heading)
+    local coords = {x = pos.x, y = pos.y, z = pos.z, h = heading}
     TriggerServerEvent("Server:Create:Vehicle", args[1], coords)
 end, false)
