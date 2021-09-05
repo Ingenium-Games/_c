@@ -82,7 +82,15 @@ end
 
 -- ====================================================================================--
 
-c.RegisterServerCallback("GetCurrentJobs", function(...) 
+c.RegisterServerCallback("GetCurrentJobs", function(source, ...) 
+    local src = tonumber(source)
     return c.job.ActiveMembers()
 end)
 
+c.RegisterServerCallback("Create:Vehicle", function(source, ...)
+    local src = tonumber(source)
+    local name, coords = table.unpack(...)
+    local vehicle = c.CreateVehicle(name, coords.x, coords.y, coords.z, coords.h)
+    TriggerClientEvent("Client:Notify", src, coords.x..","..coords.y..",".. coords.z..","..coords.h)
+    return vehicle
+end)

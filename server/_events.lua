@@ -253,28 +253,19 @@ end)
 
 RegisterNetEvent("Server:EnteredVehicle")
 AddEventHandler("Server:EnteredVehicle", function(vehicle, seat, name, netId)
-    
+    DisplayRadar(true)
 end)
 
 
 RegisterNetEvent("Server:LeftVehicle")
 AddEventHandler("Server:LeftVehicle", function(vehicle, seat, name, netId)
-    
+    DisplayRadar(false)
 end)
 
-RegisterNetEvent("Server:EnteringAborted")
-AddEventHandler("Server:EnteringAborted", function()
+RegisterNetEvent("Server:EnteringVehicle:Aborted")
+AddEventHandler("Server:EnteringVehicle:Aborted", function()
     -- before canceling event
 
     --
     CancelEvent()
-end)
-
-
-RegisterNetEvent("Server:Create:Vehicle")
-AddEventHandler("Server:Create:Vehicle", function(name, coords)
-    local src = tonumber(source)
-    TriggerClientEvent("Client:Notify", src, coords.x..","..coords.y..",".. coords.z..","..coords.h)
-    local retval, id = c.CreateVehicle(name, coords.x, coords.y, coords.z, coords.h)
-    TriggerClientEvent("Client:Notify", src, 'Spawned: '..retval..', NetID: '..id)
 end)
