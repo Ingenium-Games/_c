@@ -109,3 +109,22 @@ end
 function c.GetState(entity)
     return Entity(entity).state
 end
+
+function c.CreateVehicle(name, coords)
+    local hash = nil
+    if type(name) == "number" then
+        hash = name
+    else
+        hash = GetHashKey(name)
+    end
+    local veh = CreateVehicle(hash, coords, true, true)
+    local id = NetworkGetNetworkIdFromEntity(veh)
+end
+
+function c.CreatePed()
+
+end
+
+function c.CreateObject()
+
+end

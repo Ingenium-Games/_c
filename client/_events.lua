@@ -78,3 +78,36 @@ AddEventHandler("Client:Character:OnDuty", function()
         c.debug("Ability to go on duty has ben disabled.")
     end
 end)
+
+
+RegisterNetEvent("Client:EnteringVehicle")
+AddEventHandler("Client:EnteringVehicle", function(vehicle, seat, name, netId)
+    SetVehRadioStation(vehicle, "OFF")
+    TriggerEvent("Client:Notify", "Entering :"..name)
+end)
+
+
+RegisterNetEvent("Client:EnteredVehicle")
+AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, netId)
+    SetVehRadioStation(vehicle, "OFF")
+    SetVehicleHasBeenOwnedByPlayer(vehicle, true)
+end)
+
+
+RegisterNetEvent("Client:LeftVehicle")
+AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, netId)
+    if seat == -1 then
+        SetVehicleHasBeenDrivenFlag(vehicle, true)
+    end
+    TriggerEvent("Client:Notify", "Leaving :"..name)
+end)
+
+RegisterNetEvent("Client:EnteringAborted")
+AddEventHandler("Client:EnteringAborted", function()
+    -- before canceling event
+
+    --
+    CancelEvent()
+end)
+
+

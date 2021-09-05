@@ -243,3 +243,31 @@ AddEventHandler("Server:Bank:Add", function(data, req)
     xPlayer.AddBank(amount)
     TriggerClientEvent("Client:Notify", xPlayer.ID, "$"..amount.." was added to your account.", "warn")
 end)
+
+
+RegisterNetEvent("Server:EnteringVehicle")
+AddEventHandler("Server:EnteringVehicle", function(vehicle, seat, name, netId)
+
+end)
+
+
+RegisterNetEvent("Server:EnteredVehicle")
+AddEventHandler("Server:EnteredVehicle", function(vehicle, seat, name, netId)
+    
+end)
+
+
+RegisterNetEvent("Server:LeftVehicle")
+AddEventHandler("Server:LeftVehicle", function(vehicle, seat, name, netId)
+    
+end)
+
+RegisterNetEvent("Server:EnteringAborted")
+AddEventHandler("Server:EnteringAborted", function()
+    -- before canceling event
+
+    --
+    CancelEvent()
+end)
+
+

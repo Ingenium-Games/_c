@@ -75,3 +75,11 @@ RegisterCommand('setjob', function(source, args, rawCommand)
         TriggerClientEvent("Client:Notify", args[1], 'JobName: '..args[2]..' or JobGrade: '..args[3]..', does not exist.')
     end
 end, true)
+
+-- ====================================================================================--
+
+RegisterCommand('car', function(source, args, rawCommand)
+    local src = tonumber(source)
+    local retval = CreateVehicle(modelHash, x, y, z, heading, isNetwork, netMissionEntity)
+
+end, true)
