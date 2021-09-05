@@ -89,7 +89,7 @@ end)
 
 c.RegisterServerCallback("Create:Vehicle", function(source, name, coords)
     local src = tonumber(source)
-    local name, coords = table.unpack(...)
+    local name, coords = name, coords
     local vehicle = c.CreateVehicle(name, coords.x, coords.y, coords.z, coords.h)
     TriggerClientEvent("Client:Notify", src, coords.x..","..coords.y..",".. coords.z..","..coords.h)
     return vehicle
