@@ -55,13 +55,13 @@ function c.state.TriggerState(name, value)
 end
 
 function c.state.TriggerEffect(name,value)
-    if c.states[name][value].effect then
+    if type(c.states[name][value].effect) == "function"  then
         c.states[name][value].effect()
     end
 end
 
 function c.state.TriggerAction(name,value)
-    if c.states[name][value].action then
+    if type(c.states[name][value].action) == "function" then
         c.states[name][value].action()
     end
 end
