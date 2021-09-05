@@ -110,14 +110,14 @@ function c.GetState(entity)
     return Entity(entity).state
 end
 
-function c.CreateVehicle(name, coords)
+function c.CreateVehicle(name, x, y, z, h)
     local hash = nil
     if type(name) == "number" then
         hash = name
     else
         hash = GetHashKey(name)
     end
-    local vehicle = CreateVehicle(hash, coords, true, true)
+    local vehicle = CreateVehicle(hash, x, y, z, h, true, true)
     local id = NetworkGetNetworkIdFromEntity(vehicle)
     --
     return vehicle, id
