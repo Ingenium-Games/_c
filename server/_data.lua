@@ -253,6 +253,7 @@ function c.data.LoadPlayer(source, Character_ID)
     -- what data needs to be sent to the client?
     data.ID = xPlayer.GetID()
     data.Character_ID = xPlayer.GetCharacter_ID()
+    data.Ace = xPlayer.GetAce()
     data.City_ID = xPlayer.GetCity_ID()
     data.Full_Name = xPlayer.GetFull_Name()
     data.Phone = xPlayer.GetPhone()
