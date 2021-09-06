@@ -18,7 +18,7 @@ end, false)
 -- ====================================================================================--
 
 RegisterCommand('switch', function(source, args, rawCommand)
-    local src = tonumber(source)
+    local src = source
     local Primary_ID = c.identifier(src)
     local Character_ID = c.sql.GetActiveCharacter(Primary_ID)
     -- Send the client/sever the events once the character has changed to inactive on the db. 
@@ -35,8 +35,8 @@ end, true)
 -- ====================================================================================--
 
 RegisterCommand('ban', function(source, args, rawCommand)
-    local src = tonumber(source)
-    if (tonumber(args[1]) == src) then
+    local src = source
+    if (args[1] == src) then
         TriggerClientEvent("Client:Notify", src, 'You cannot /ban yourself.')
     else
         local Primary_ID = c.identifier(args[1])
@@ -51,8 +51,8 @@ end, true)
 -- ====================================================================================--
 
 RegisterCommand('kick', function(source, args, rawCommand)
-    local src = tonumber(source)
-    if (tonumber(args[1]) == src) then
+    local src = source
+    if (args[1] == src) then
         TriggerClientEvent("Client:Notify", src, 'You cannot /kick yourself.')
     else
         local xPlayer = c.data.GetPlayer(args[1])
@@ -64,7 +64,7 @@ end, true)
 -- ====================================================================================--
 
 RegisterCommand('setjob', function(source, args, rawCommand)
-    local src = tonumber(source)
+    local src = source
     if c.job.Exist(args[2], args[3]) then
         local xPlayer = c.data.GetPlayer(args[1])
         xPlayer.SetJob(args[2], args[3])
@@ -78,3 +78,15 @@ end, true)
 
 -- ====================================================================================--
 
+RegisterCommand('car', function(source, args, rawCommand)
+    local src = source
+    local pos = GetEntityCoords(GetPlayerPed(src))
+    local heading = GetEntityHeading(GetPlayerPed(src))
+    local coords = {x = pos.x, y = pos.y, z = pos.z, h = heading}
+    local vehicle = c.CreateVehicle(args[1], coords)
+    if vehicle then
+        c.debug("Client:Notify Spawned: "..args[1].." @ "..pos.x..","..pos.y..","..pos.z..","..heading..".")
+        TriggerClientEvent("Client:Notify", src, "Spawned: "..args[1].." @ "..pos.x..","..pos.y..","..pos.z..","..heading..".")
+    end
+
+end, false)
