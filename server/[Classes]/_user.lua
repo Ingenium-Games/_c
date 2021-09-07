@@ -15,8 +15,8 @@ function c.class.CreateUser(req)
     c.debug('Start User Class Creation')
     local src = tonumber(req)
     local Steam_ID, FiveM_ID, License_ID, Discord_ID, IP_Address = c.identifiers(src)
-    local Ace = c.sql.GetAce(License_ID)
-    local Locale = c.sql.GetLocale(License_ID)
+    local Ace = c.sql.user.GetAce(License_ID)
+    local Locale = c.sql.user.GetLocale(License_ID)
     local self = {}
     --
     self.ID = src

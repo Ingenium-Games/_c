@@ -2,6 +2,8 @@
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
 if not c.sql then c.sql = {} end
+--
+c.sql.jobs = {}
 --[[
 NOTES.
     - All sql querys should have a call back as a function at the end to chain code execution upon completion.
@@ -12,7 +14,7 @@ math.randomseed(c.Seed)
 
 --- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.
 ---@param cb function "Callback function if any, called after the SQL statement."
-function c.sql.GrabJobs(cb)
+function c.sql.jobs.GetAll(cb)
     local IsBusy = true
     local result = nil
     MySQL.Async.fetchAll('SELECT * FROM `jobs`', {
@@ -38,7 +40,7 @@ end
 
 --- Takes Job_Accounts information from the Database and imports it into the Server Upon the Initialise() function.
 ---@param cb function "Callback function if any, called after the SQL statement."
-function c.sql.SetupJobs(cb)
+function c.sql.jobs.Setup(cb)
     local IsBusy = true
     MySQL.Async.fetchAll('SELECT * FROM `job_accounts`', {
     }, function(data)
@@ -76,7 +78,7 @@ end
 
 --- Takes Job information from the Database and imports it into the Server Upon the Initialise() function.
 ---@param cb function "Callback function if any, called after the SQL statement."
-function c.sql.GrabJobAccounts(cb)
+function c.sql.jobs.Accounts(cb)
     local IsBusy = true
     local result = nil
     MySQL.Async.fetchAll('SELECT * FROM `job_accounts`', {
@@ -84,7 +86,7 @@ function c.sql.GrabJobAccounts(cb)
         for i=1, #data, 1 do
             local i = data[i]
             if not c.jobs[i.Name] then
-                c.debug("Please run GrabJobs(), followed by SetupJobs() before this...")
+                c.debug("Please run GetAll(), followed by Setup() before this...")
             end
             c.jobs[i.Name].Accounts = json.decode(i.Accounts)
             c.jobs[i.Name].Members = json.decode(i.Members)

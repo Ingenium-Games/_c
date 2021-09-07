@@ -2,6 +2,8 @@
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
 if not c.sql then c.sql = {} end
+--
+c.sql.save = {}
 --[[
 NOTES.
     - All sql querys should have a call back as a function at the end to chain code execution upon completion.
@@ -22,7 +24,7 @@ end)
 --- Save Single User/Character
 ---@param data table "xPlayer table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
-function c.sql.SaveUser(data, cb)
+function c.sql.save.User(data, cb)
     if data then
         -- Other Variables.
         local Health = data.GetHealth()
@@ -62,7 +64,7 @@ end
 
 --- Save All Characters from the xPLayer Table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.SaveUsers(cb)
+function c.sql.save.Users(cb)
     local xPlayers = c.data.GetPlayers()
     for i = 1, #xPlayers, 1 do
         local data = c.data.GetPlayer(i)
@@ -116,7 +118,7 @@ end)
 --- Save Single User/Character
 ---@param data table "xCar table"
 ---@param cb function "To be called on SQL 'UPDATE' statement completion."
-function c.sql.SaveVehicle(data, cb)
+function c.sql.save.Vehicle(data, cb)
     if data then
         -- Other Variables.
         local Garage = data.GetGarage()
@@ -157,7 +159,7 @@ end
 
 --- Save All Characters from the xPLayer Table.
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.SaveVehicles(cb)
+function c.sql.save.Vehicles(cb)
     local xVehicles = c.data.GetVehicles()
     for i = 1, #xVehicles, 1 do
         local data = c.data.GetVehicle(i)
@@ -210,7 +212,7 @@ end)
 
 --- Save All Job Accounts
 ---@param cb function "To be called on SQL 'UPDATE' statements are completed."
-function c.sql.SaveJobs(cb)
+function c.sql.save.Jobs(cb)
     local xJobs = c.data.GetJobs()
     for k,v in pairs(xJobs) do
         -- Tables require JSON Encoding.

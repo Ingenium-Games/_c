@@ -55,13 +55,13 @@ AddEventHandler('Server:PlayerConnecting', function()
     if License_ID then
         c.data.AddPlayer(src)
         -- Lets see if the player exists.
-        local exists = c.sql.FindUser(License_ID)
+        local exists = c.sql.user.Find(License_ID)
         if (exists == nil) then            
             -- If no user present.    
-            c.sql.AddUser(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
+            c.sql.user.Add(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
         else
             -- If user exists, update based on connection info.
-            c.sql.UpdateUser(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
+            c.sql.user.Update(Username, License_ID, FiveM_ID, Steam_ID, Discord_ID, IP_Address, Startup)
         end
     else
         DropPlayer(src, 'No License Identifier, No Entry.')
@@ -78,7 +78,7 @@ AddEventHandler('playerDropped', function()
         -- Remove Job Permissions
         ExecuteCommand(('remove_principal identifier.%s job.%s'):format(xPlayer.License_ID, xPlayer.GetJob().Name))
         -- Save Data
-        c.sql.SaveUser(xPlayer, function()
+        c.sql.save.User(xPlayer, function()
             c.sql.SetCharacterInActive(xPlayer.Character_ID, function()
                 c.debug("[E] 'playerDropped' : Player Disconnection.")
                 c.data.RemovePlayer(src)

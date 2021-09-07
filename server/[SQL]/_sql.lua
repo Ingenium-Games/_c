@@ -2,6 +2,8 @@
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
 if not c.sql then c.sql = {} end
+--
+c.sql.gen = {}
 --[[
 NOTES
 
@@ -12,7 +14,7 @@ NOTES
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-function c.sql.GenerateCharacterID(cb)
+function c.sql.gen.CharacterID(cb)
     local bool = false
     local new = nil
     repeat
@@ -34,7 +36,7 @@ function c.sql.GenerateCharacterID(cb)
     return new
 end
 
-function c.sql.GenerateCityID(cb)
+function c.sql.gen.CityID(cb)
     local bool = false
     local new = nil
     repeat
@@ -57,7 +59,7 @@ function c.sql.GenerateCityID(cb)
     return new
 end
 
-function c.sql.GeneratePhoneNumber(cb)
+function c.sql.gen.PhoneNumber(cb)
     local bool = false
     local new = nil
     repeat
@@ -78,7 +80,7 @@ function c.sql.GeneratePhoneNumber(cb)
     return new
 end
 
-function c.sql.GenerateAccountNumber(cb)
+function c.sql.gen.AccountNumber(cb)
     local bool = false
     local new = nil
     repeat
@@ -97,47 +99,4 @@ function c.sql.GenerateAccountNumber(cb)
         cb()
     end
     return new
-end
-
--- ====================================================================================--
--- SHould remake htis one..
-function c.sql.CreateCharacter(t, cb)
-    MySQL.Async.execute(
-        'INSERT INTO `characters` (`Primary_ID`, `Character_ID`, `City_ID`, `First_Name`, `Last_Name`, `Height`, `Birth_Date`, `Phone`, `Coords`, `Accounts`, `Modifiers`) VALUES (@Primary_ID, @Character_ID, @City_ID, @First_Name, @Last_Name, @Height, @Birth_Date, @Phone, @Coords, @Accounts, @Modifiers);',
-        {
-            Primary_ID = t.Primary_ID,
-            Character_ID = t.Character_ID,
-            City_ID = t.City_ID,
-            First_Name = t.First_Name,
-            Last_Name = t.Last_Name,
-            Height = t.Height,
-            Birth_Date = t.Birth_Date,
-            Phone = t.Phone,
-            Coords = t.Coords,
-            Accounts = t.Accounts,
-            Modifiers = t.Modifiers,
-        }, function(data)
-            if data then
-
-            end
-            if cb then
-                cb()
-            end
-        end)
-end
-
-function c.sql.CreateLoanAccount(Character_ID, Account_Number, cb)
-    MySQL.Async.execute(
-        'INSERT INTO `character_accounts` (`Character_ID`, `Account_Number`, `Bank`) VALUES (@Character_ID, @Account_Number, @Bank);',{
-            ['@Character_ID'] = Character_ID,
-            ['@Account_Number'] = Account_Number,
-            ['@Bank'] = conf.startingloan,
-        }, function(data)
-            if data then
-
-            end
-            if cb then
-                cb()
-            end
-        end)
 end

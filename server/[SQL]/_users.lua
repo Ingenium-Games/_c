@@ -2,6 +2,8 @@
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
 if not c.sql then c.sql = {} end
+--
+c.sql.user = {}
 --[[
 NOTES.
     - All sql querys should have a call back as a function at the end to chain code execution upon completion.
@@ -10,7 +12,7 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-function c.sql.FindUser(license_id, cb)
+function c.sql.user.Find(license_id, cb)
     local License_ID = license_id
     local result = nil
     local IsBusy = true
@@ -29,7 +31,7 @@ function c.sql.FindUser(license_id, cb)
     return result
 end
 
-function c.sql.AddUser(usermame, license_id, fivem_id, steam_id, discord_id, ip, cb)
+function c.sql.user.Add(usermame, license_id, fivem_id, steam_id, discord_id, ip, cb)
     local Username = usermame
     local License_ID = license_id
     local FiveM_ID = fivem_id
@@ -57,7 +59,7 @@ function c.sql.AddUser(usermame, license_id, fivem_id, steam_id, discord_id, ip,
     end
 end
 
-function c.sql.UpdateUser(usermame, license_id, fivem_id, steam_id, discord_id, ip, cb)
+function c.sql.user.Update(usermame, license_id, fivem_id, steam_id, discord_id, ip, cb)
     local Username = usermame
     local License_ID = license_id
     local FiveM_ID = fivem_id
@@ -85,7 +87,7 @@ end
 
 --- Get - `Locale` from the users License_ID
 -- @License_ID
-function c.sql.GetLastLogin(license_id, cb)
+function c.sql.user.GetLastLogin(license_id, cb)
     local License_ID = license_id
     local IsBusy = true
     local result = nil
@@ -106,7 +108,7 @@ end
 
 --- Get - `Locale` from the users License_ID
 -- @License_ID
-function c.sql.GetLocale(license_id, cb)
+function c.sql.user.GetLocale(license_id, cb)
     local License_ID = license_id
     local IsBusy = true
     local result = nil
@@ -127,7 +129,7 @@ end
 
 --- Set - Prefered locale or `Locale` for the users License_ID
 -- @License_ID
-function c.sql.SetLocale(locale, license_id, cb)
+function c.sql.user.SetLocale(locale, license_id, cb)
     local License_ID = license_id
     local Locale = locale
     MySQL.Async.execute('UPDATE `users` SET `Locale` = @Locale WHERE `License_ID` = @License_ID;', {
@@ -145,7 +147,7 @@ end
 
 --- Get - `Ace` from the users License_ID identifier
 -- @License_ID
-function c.sql.GetAce(license_id, cb)
+function c.sql.user.GetAce(license_id, cb)
     local License_ID = license_id
     local IsBusy = true
     local result = nil
@@ -166,7 +168,7 @@ end
 
 --- Set - `Ace` for the users License_ID
 -- @License_ID
-function c.sql.SetAce(ace, license_id, cb)
+function c.sql.user.SetAce(ace, license_id, cb)
     local License_ID = license_id
     local Ace = ace
     MySQL.Async.execute('UPDATE `users` SET `Ace` = @Ace WHERE `License_ID` = @License_ID;', {
@@ -184,7 +186,7 @@ end
 
 --- Get - `Ban` from the users License_ID identifier
 -- @License_ID
-function c.sql.GetBanStatus(license_id, cb)
+function c.sql.user.GetBan(license_id, cb)
     local License_ID = license_id
     local IsBusy = true
     local result = nil
@@ -203,27 +205,14 @@ function c.sql.GetBanStatus(license_id, cb)
     return result
 end
 
---- Set - `Ban` = TRUE from the users License_ID identifier
+--- Set - `Ban` = bool from the users License_ID identifier
 -- @License_ID
-function c.sql.SetBanned(license_id, cb)
+function c.sql.user.SetBan(license_id, bool, cb)
+    if type(bool) ~= "boolean" then c.debug("c.sql.user.SetBan, boolean was not passed") return end
     local License_ID = license_id
-    MySQL.Async.execute('UPDATE `users` SET `Ban` = TRUE WHERE `License_ID` = @License_ID LIMIT 1;', {
-        ['@License_ID'] = License_ID
-    }, function(data)
-        if data then
-            --
-        end
-        if cb then
-            cb()
-        end
-    end)
-end
-
---- Set - `Ban` = FALSE from the users License_ID identifier
--- @License_ID
-function c.sql.SetUnBanned(license_id, cb)
-    local License_ID = license_id
-    MySQL.Async.execute('UPDATE `users` SET `Ban` = FALSE WHERE `License_ID` = @License_ID LIMIT 1;', {
+    local Bool = bool
+    MySQL.Async.execute('UPDATE `users` SET `Ban` = @Bool TRUE WHERE `License_ID` = @License_ID LIMIT 1;', {
+        ['@Bool'] = Bool,
         ['@License_ID'] = License_ID
     }, function(data)
         if data then

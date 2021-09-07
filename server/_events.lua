@@ -14,7 +14,7 @@ math.randomseed(c.Seed)
 RegisterNetEvent('Server:Character:Request:List')
 AddEventHandler('Server:Character:Request:List', function(req, Primary_ID)
     local src = tonumber(req) or source
-    local Characters = c.sql.GetCharacters(Primary_ID)
+    local Characters = c.sql.char.GetAll(Primary_ID)
     local Command = "OnJoin"
     -- Send the data table to the client that requested it...
     TriggerClientEvent('Client:Character:Open', src, Command, Characters)
@@ -30,7 +30,7 @@ AddEventHandler('Server:Character:Request:Join', function(Character_ID)
         local message = "OnNew"
         TriggerClientEvent('Client:Character:Open', src, message)
     elseif Character_ID ~= nil then
-        local Coords = c.sql.GetCharacterCoords(Character_ID)
+        local Coords = c.sql.char.GetCoords(Character_ID)
         c.data.LoadPlayer(src, Character_ID)
         TriggerClientEvent('Client:Character:ReSpawn', src, Character_ID, Coords)
     elseif Character_ID == nil then
@@ -43,7 +43,7 @@ RegisterNetEvent('Server:Character:Request:Delete')
 AddEventHandler('Server:Character:Request:Delete', function(Character_ID)
     local src = tonumber(source)
     local prim = c.identifier(src)
-    c.sql.DeleteCharacter(Character_ID, function()
+    c.sql.char.Delete(Character_ID, function()
         TriggerEvent('Server:Character:Request:List', src, prim)
     end)
 end)
@@ -53,10 +53,10 @@ end)
 RegisterNetEvent('Server:Character:Request:Create')
 AddEventHandler('Server:Character:Request:Create', function(first_name, last_name, height, date)
     local src = tonumber(source)
-    local char = c.sql.GenerateCharacterID()
-    local city = c.sql.GenerateCityID()
-    local phone = c.sql.GeneratePhoneNumber()
-    local banknum = c.sql.GenerateAccountNumber()
+    local char = c.sql.gen.CharacterID()
+    local city = c.sql.gen.CityID()
+    local phone = c.sql.gen.PhoneNumber()
+    local banknum = c.sql.gen.AccountNumber()
     local prim = c.identifier(src)
     local data = {
         Primary_ID = prim, -- Owner
@@ -72,9 +72,9 @@ AddEventHandler('Server:Character:Request:Create', function(first_name, last_nam
         Accounts = json.encode(conf.default.accounts),
         Modifiers = json.encode(conf.default.modifiers),
     }
-    c.sql.CreateCharacter(data, function()
+    c.sql.char.Add(data, function()
         -- CHain other required actions upon the initial data being added, like other tables that use forigen keys etc.
-        c.sql.CreateLoanAccount(char, banknum)
+        c.sql.bank.AddAccount(char, banknum)
         
     end)
     c.data.LoadPlayer(src, char)

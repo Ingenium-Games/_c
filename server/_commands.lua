@@ -41,7 +41,8 @@ RegisterCommand('ban', function(source, args, rawCommand)
     else
         local Primary_ID = c.identifier(args[1])
         local xPlayer = c.data.GetPlayer(args[1])
-        c.sql.SetBanned(Primary_ID, function()
+        local ban = true -- should probably add a check but meh.
+        c.sql.user.SetBan(Primary_ID, ban, function()
             xPlayer.Kick('You have been banned.')
             TriggerClientEvent("Client:Notify", src, 'TargetID: ' .. args[1] .. ', has been banned.')
         end)

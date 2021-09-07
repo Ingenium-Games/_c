@@ -2,6 +2,8 @@
 --  MIT License 2020 : Twiitchter
 -- ====================================================================================--
 if not c.sql then c.sql = {} end
+--
+c.sql.bank = {}
 --[[
 NOTES.
     - All sql querys should have a call back as a function at the end to chain code execution upon completion.
@@ -10,10 +12,26 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
+function c.sql.bank.AddAccount(Character_ID, Account_Number, cb)
+    MySQL.Async.execute(
+        'INSERT INTO `character_accounts` (`Character_ID`, `Account_Number`, `Bank`) VALUES (@Character_ID, @Account_Number, @Bank);',{
+            ['@Character_ID'] = Character_ID,
+            ['@Account_Number'] = Account_Number,
+            ['@Bank'] = conf.startingloan,
+        }, function(data)
+            if data then
+
+            end
+            if cb then
+                cb()
+            end
+        end)
+end
+
 --- Get - The `Bank` from the `Character_ID`
 -- @`Character_ID`
 -- cb if any.
-function c.sql.GetCharacterBank(character_id, cb)
+function c.sql.bank.GetBank(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
@@ -38,7 +56,7 @@ end
 -- @`Character_ID`
 -- @Bank - INT VALUE
 -- cb if any.
-function c.sql.SetCharacterBank(character_id, bank, cb)
+function c.sql.bank.SetBank(character_id, bank, cb)
     local Character_ID = character_id
     local Bank = bank
     MySQL.Async.execute('UPDATE `character_accounts` SET `Bank` = @Bank WHERE `Character_ID` = @Character_ID;', {
@@ -54,9 +72,9 @@ function c.sql.SetCharacterBank(character_id, bank, cb)
     end)
 end
 
-function c.sql.TakeOutLoan(character_id, amount, duration, cb)
+function c.sql.bank.TakeOutLoan(character_id, amount, duration, cb)
     local Character_ID = character_id
-    local Bank = c.sql.GetCharacterBank(Character_ID)
+    local Bank = c.sql.char.GetBank(Character_ID)
     local Amount = amount
     local NewBank = Bank + Amount
     local Duration = duration
@@ -69,7 +87,7 @@ end
 --- Get - The `Bank` from the `Character_ID`
 -- @`Character_ID`
 -- cb if any.
-function c.sql.GetCharacterLoan(character_id, cb)
+function c.sql.bank.GetLoan(character_id, cb)
     local Character_ID = character_id
     local IsBusy = true
     local result = nil
@@ -94,7 +112,7 @@ end
 -- @`Character_ID`
 -- @Bank - INT VALUE
 -- cb if any.
-function c.sql.SetCharacterLoan(character_id, loan, duration, cb)
+function c.sql.bank.SetLoan(character_id, loan, duration, cb)
     local Character_ID = character_id
     local Loan = loan
     local Duration = duration
@@ -115,7 +133,7 @@ function c.sql.SetCharacterLoan(character_id, loan, duration, cb)
 end
 
 -- cb if any.
-function c.sql.TickOverLoanInterest(cb)
+function c.sql.bank.TickOverLoanInterest(cb)
     MySQL.Async.execute('UPDATE `character_accounts` SET `Loan` = Loan * 3.5 WHERE `Duration` >= 1;', {}, function(data)
         if data then
             --
@@ -127,7 +145,7 @@ function c.sql.TickOverLoanInterest(cb)
 end
 
 -- cb if any.
-function c.sql.TickOverLoanDuration(cb)
+function c.sql.bank.TickOverLoanDuration(cb)
     MySQL.Async.execute('UPDATE `character_accounts` SET `Duration` = Duration - 1 WHERE `Active` = TRUE;', {},
         function(data)
             if data then
@@ -140,7 +158,7 @@ function c.sql.TickOverLoanDuration(cb)
 end
 
 -- cb if any.
-function c.sql.TickOverLoansInactive(cb)
+function c.sql.bank.TickOverLoansInactive(cb)
     MySQL.Async.execute('UPDATE `character_accounts` SET `Active` = FALSE WHERE `Duration` = 0;', {}, function(data)
         if data then
             --

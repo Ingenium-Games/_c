@@ -37,11 +37,11 @@ function c.data.Initilize()
         -- [1]
         c.sql.ResetActiveCharacters(cb)
         -- [2]
-        c.sql.GrabJobs(cb)
+        c.sql.jobs.GetAll(cb)
         -- [3]
-        c.sql.SetupJobs(cb)
+        c.sql.jobs.Setup(cb)
         -- [4]
-        c.sql.GrabJobAccounts(cb)
+        c.sql.jobs.Accounts(cb)
         -- [5] -- Not so much a SQL function, but dependant on it being conducted in order.
         c.data.CreateJobObjects()
         cb()
@@ -219,15 +219,15 @@ end
 -- Server to DB routine.
 function c.data.ServerSync()
     local function Do()
-        c.sql.SaveUsers(function() 
+        c.sql.save.Users(function() 
             -- do 
         end)
         Citizen.Wait(conf.sec * 5)
-        c.sql.SaveVehicles(function() 
+        c.sql.save.Vehicles(function() 
             -- do 
         end)
         Citizen.Wait(conf.sec * 5)
-        c.sql.SaveJobs(function() 
+        c.sql.save.Jobs(function() 
             -- do 
         end)
         Citizen.Wait(conf.sec * 5)
@@ -265,7 +265,7 @@ function c.data.LoadPlayer(source, Character_ID)
     data.Modifiers = xPlayer.GetModifiers()
     data.Appearance = xPlayer.GetAppearance()
     --
-    c.sql.SetCharacterActive(Character_ID, function()
+    c.sql.char.SetActive(Character_ID, true, function()
         c.data.SetPlayer(src, xPlayer)
         c.inst.SetPlayer(source, xPlayer.GetInstance())
         TriggerClientEvent('Client:Character:Loaded', src, data)

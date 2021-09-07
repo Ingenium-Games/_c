@@ -13,7 +13,7 @@ math.randomseed(c.Seed)
 
 function c.class.CreateCharacter(character_id)
     c.debug("Start Character Class Creation")
-    local data = c.sql.GetCharacter(character_id)
+    local data = c.sql.char.Get(character_id)
     local self = {}
     -- Strings
     self.Character_ID = data.Character_ID -- 50 Random Characters [Aa-Zz][0-9]
