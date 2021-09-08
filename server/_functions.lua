@@ -122,10 +122,25 @@ function c.CreateVehicle(name, x, y, z, h)
     return vehicle
 end
 
-function c.CreatePed()
-
+function c.CreatePed(name, x, y, z, h)
+    local hash = nil
+    if type(name) == "number" then
+        hash = name
+    else
+        hash = GetHashKey(name)
+    end
+    local ped = CreatePed(0, hash, x, y, z, h, true, false)
+    return ped
 end
 
-function c.CreateObject()
-
+function c.CreateObject(name, x, y, z, isdoor)
+    local hash = nil
+    if type(name) == "number" then
+        hash = name
+    else
+        hash = GetHashKey(name)
+    end
+    if type(isdoor) ~= "boolean" then isdoor = false end
+    local object = CreateObject(hash, x, y, z, true, isdoor)
+    return object
 end

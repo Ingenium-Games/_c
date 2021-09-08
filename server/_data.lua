@@ -13,6 +13,22 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
+
+function c.data.LoadFiles()
+    c.gsr.Load()
+    c.gsr.CleanUp()
+
+    c.drop.Load()
+    c.drop.CleanUp()
+
+    c.pick.Load()
+    c.pick.CleanUp()
+
+    c.note.Load()
+    c.note.CleanUp()    
+end
+
+
 --- Used on startup prior to the server really running.
 function c.data.Initilize()
     c.debug('Loading Sequence Begin.')
@@ -46,7 +62,7 @@ function c.data.Initilize()
         c.data.CreateJobObjects()
         cb()
         --
-        LoadDataFiles()
+        c.data.LoadFiles()
         cb()
         --
         loaded = true

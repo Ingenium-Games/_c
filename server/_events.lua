@@ -79,11 +79,15 @@ AddEventHandler('Server:Character:Request:Create', function(first_name, last_nam
     end)
     c.data.LoadPlayer(src, char)
     TriggerClientEvent('Client:Character:FirstSpawn', src)
-    ---
-    ---
-    ---
-    ---
+    --[[
+            ADD YOUR CHARACTER CREATION EVENT BELOW
+    ]]--
+    
     TriggerClientEvent('creator:OpenCreator', src)
+    
+    --[[
+            ADD YOUR CHARACTER CREATION EVENT ABOVE
+    ]]--
     Wait(500)
     c.inst.SetPlayer(src, c.inst.New())
 end)
