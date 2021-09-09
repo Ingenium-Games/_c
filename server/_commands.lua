@@ -90,6 +90,21 @@ RegisterCommand('car', function(source, args, rawCommand)
     local heading = GetEntityHeading(GetPlayerPed(src))
     local coords = {x = pos.x, y = pos.y, z = pos.z, h = heading}
     local vehicle = c.CreateVehicle(args[1], coords.x, coords.y, coords.z, coords.h)
-    c.class.VehicleClass(vehicle)
+    while DoesEntityExist(vehicle) == false do
+        Wait(50)
+    end
+    local xVehicle = c.class.VehicleClass(vehicle)
+    table.insert(c.vehicles, xVehicle)
     TriggerClientEvent("Client:Notify", src, "Spawned: "..args[1].." @ "..pos.x..","..pos.y..","..pos.z..","..heading..".")
+end, false)
+
+RegisterCommand('cartest', function(source, args, rawCommand)
+    TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
+    local src = source
+    local vehicle = c.CreateVehicle("ADDER", 0,0,0,180)
+    while DoesEntityExist(vehicle) == false do
+        Wait(50)
+    end
+    local xVehicle = c.class.VehicleClass(vehicle)
+    table.insert(c.vehicles, xVehicle)
 end, false)
