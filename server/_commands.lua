@@ -108,7 +108,7 @@ RegisterCommand('cartest', function(source, args, rawCommand)
     else
         print("true")
     end
-    local xVehicle = c.class.VehicleClass(vehicle)
+    local xVehicle = c.class.UnOwnedVehicle(vehicle)
     table.insert(c.vehicles, xVehicle)
     print(c.table.Dump(c.vehicles))
 end, false)
