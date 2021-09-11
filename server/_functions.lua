@@ -118,7 +118,7 @@ function c.CreateVehicle(name, x, y, z, h)
     else
         hash = GetHashKey(name)
     end
-    local vehicle = CreateVehicle(hash, x, y, z, h, true, false)
+    local vehicle = CreateVehicle(hash, x, y, z, h, true, true)
     return vehicle
 end
 
