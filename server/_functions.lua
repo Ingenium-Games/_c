@@ -120,7 +120,7 @@ function c.CreateVehicle(name, x, y, z, h)
     end
     local vehicle = CreateVehicle(hash, x, y, z, h, true, true)
     local net = NetworkGetNetworkIdFromEntity(vehicle)
-    return net
+    return vehicle, net
 end
 
 function c.CreatePed(name, x, y, z, h)

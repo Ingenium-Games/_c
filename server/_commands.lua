@@ -100,9 +100,9 @@ end, false)
 RegisterCommand('c', function(source, args, rawCommand)
     TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
     local src = source
-    local vehicle = c.CreateVehicle("ADDER", 0, 0, 0, 0)
-    print(vehicle)
-    local xVehicle = c.class.UnOwnedVehicle(vehicle)
+    local net, vehicle = c.CreateVehicle("ADDER", 0, 0, 0, 0)
+    print(net, vehicle)
+    local xVehicle = c.class.UnOwnedVehicle(net)
     table.insert(c.vehicles, xVehicle)
     print(c.table.Dump(c.vehicles))
 end, true)
