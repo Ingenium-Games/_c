@@ -90,8 +90,9 @@ RegisterCommand('car', function(source, args, rawCommand)
     local heading = GetEntityHeading(GetPlayerPed(src))
     local coords = {x = pos.x, y = pos.y, z = pos.z, h = heading}
     local vehicle = c.CreateVehicle(args[1], coords.x, coords.y, coords.z, coords.h)
-
-    local xVehicle = c.class.UnOwnedVehicle(vehicle)
+    local netID = c.TriggerClientCallback("GetNetID", src, vehicle)
+    print(netID)
+    local xVehicle = c.class.UnOwnedVehicle(netID)
     table.insert(c.vehicles, xVehicle)
 
     TriggerClientEvent("Client:Notify", src, "Spawned: "..args[1].." @ "..pos.x..","..pos.y..","..pos.z..","..heading..".")
@@ -115,5 +116,7 @@ RegisterCommand('c', function(source, args, rawCommand)
     TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
     local src = source
     local vehicle = DoTheThing("ADDER", 0, 0, 0, 0)
-    print(src, 'nil', vehicle)
+    print(src, vehicle)
+    local netID = c.TriggerClientCallback("GetNetID", src, vehicle)
+    print(netID)
 end, true)
