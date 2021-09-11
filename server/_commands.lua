@@ -105,7 +105,8 @@ function DoTheThing(name, x, y, z, h)
     else
         hash = GetHashKey(name)
     end
-    local vehicle = CreateVehicle(hash, x, y, z, h, true, true)
+    local vehicle = CreateVehicle(hash, x, y, z, h, false, false)
+
     local net = NetworkGetNetworkIdFromEntity(vehicle)
     return vehicle, net
 end
