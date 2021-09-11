@@ -107,13 +107,13 @@ function DoTheThing(name, x, y, z, h)
     end
     local vehicle = CreateVehicle(hash, x, y, z, h, false, false)
 
-    local net = NetworkGetNetworkIdFromEntity(vehicle)
-    return vehicle, net
+    --local net = NetworkGetNetworkIdFromEntity(vehicle)
+    return vehicle--, net
 end
 
 RegisterCommand('c', function(source, args, rawCommand)
     TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
     local src = source
-    local net, vehicle = DoTheThing("ADDER", 0, 0, 0, 0)
-    print(src, net, vehicle)
+    local vehicle = DoTheThing("ADDER", 0, 0, 0, 0)
+    print(src, 'nil', vehicle)
 end, true)
