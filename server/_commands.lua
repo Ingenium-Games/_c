@@ -89,34 +89,9 @@ RegisterCommand('car', function(source, args, rawCommand)
     local pos = GetEntityCoords(GetPlayerPed(src))
     local heading = GetEntityHeading(GetPlayerPed(src))
     local coords = {x = pos.x, y = pos.y, z = pos.z, h = heading}
-    local vehicle = c.CreateVehicle(args[1], coords.x, coords.y, coords.z, coords.h)
-    local netID = c.TriggerClientCallback("GetNetID", src, vehicle)
-    print(netID)
-    local xVehicle = c.class.UnOwnedVehicle(netID)
+    local net = c.CreateVehicle(args[1], coords.x, coords.y, coords.z, coords.h)
+    local vehicle = NetworkGetEntityFromNetworkId(net)
+    local xVehicle = c.class.UnOwnedVehicle(vehicle)
     table.insert(c.vehicles, xVehicle)
-
     TriggerClientEvent("Client:Notify", src, "Spawned: "..args[1].." @ "..pos.x..","..pos.y..","..pos.z..","..heading..".")
 end, false)
-
-
-function DoTheThing(name, x, y, z, h)
-    local hash = nil
-    if type(name) == "number" then
-        hash = name
-    else
-        hash = GetHashKey(name)
-    end
-    local vehicle = CreateVehicle(hash, x, y, z, h, false, false)
-
-    --local net = NetworkGetNetworkIdFromEntity(vehicle)
-    return vehicle--, net
-end
-
-RegisterCommand('c', function(source, args, rawCommand)
-    TriggerEvent('txaLogger:CommandExecuted', rawCommand) -- txAdmin logging Callback
-    local src = source
-    local vehicle = DoTheThing("ADDER", 0, 0, 0, 0)
-    print(src, vehicle)
-    local netID = c.TriggerClientCallback(src, "GetNetID", vehicle)
-    print(netID)
-end, true)

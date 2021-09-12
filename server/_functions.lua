@@ -118,9 +118,8 @@ function c.CreateVehicle(name, x, y, z, h)
     else
         hash = GetHashKey(name)
     end
-    local vehicle = CreateVehicle(hash, x, y, z, h, true, true)
-    local net = NetworkGetNetworkIdFromEntity(vehicle)
-    return vehicle, net
+    local net = CreateVehicle(hash, x, y, z, h, true, true)
+    return net
 end
 
 function c.CreatePed(name, x, y, z, h)
@@ -130,8 +129,8 @@ function c.CreatePed(name, x, y, z, h)
     else
         hash = GetHashKey(name)
     end
-    local ped = CreatePed(0, hash, x, y, z, h, true, false)
-    return ped
+    local net = CreatePed(0, hash, x, y, z, h, true, false)
+    return net
 end
 
 function c.CreateObject(name, x, y, z, isdoor)
@@ -142,6 +141,6 @@ function c.CreateObject(name, x, y, z, isdoor)
         hash = GetHashKey(name)
     end
     if type(isdoor) ~= "boolean" then isdoor = false end
-    local object = CreateObject(hash, x, y, z, true, isdoor)
-    return object
+    local net = CreateObject(hash, x, y, z, true, isdoor)
+    return net
 end
