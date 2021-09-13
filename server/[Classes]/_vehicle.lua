@@ -11,7 +11,7 @@ NOTES.
 math.randomseed(c.Seed)
 -- ====================================================================================--
 
-function c.class.UnOwnedVehicle(entity)
+function c.class.UnownedVehicle(entity)
     local self = {}
     self.Entity = entity
     --

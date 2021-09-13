@@ -87,8 +87,14 @@ c.RegisterServerCallback("GetCurrentJobs", function(source, ...)
     return c.job.ActiveMembers()
 end)
 
-c.RegisterServerCallback("Create:Vehicle", function(source, name, coords)
-    local src = tonumber(source)
-    local vehicle = c.CreateVehicle(name, coords.x, coords.y, coords.z, coords.h)
-    return vehicle
+c.RegisterServerCallback("CreateOwnedVehicle", function(source, entity, net, plate)
+    local xVehicle = c.class.OwnedVehicle(entity, plate)
+    table.insert(c.vehicles, net)
+    c.vehicles[net] = xVehicle
+end)
+
+c.RegisterServerCallback("CreateUnownedVehicle", function(source, entity, net)
+    local xVehicle = c.class.UnownedVehicle(entity)
+    table.insert(c.vehicles, net)
+    c.vehicles[net] = xVehicle
 end)
