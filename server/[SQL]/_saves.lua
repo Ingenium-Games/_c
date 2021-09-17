@@ -164,36 +164,36 @@ function c.sql.save.Vehicles(cb)
     for i = 1, #xVehicles, 1 do
         local data = c.data.GetVehicle(i)
         if data.GetOwner() then
-        -- Other Variables.
-        local Garage = data.GetGarage()
-        -- Booleans
-        local State = data.GetState()
-        local Impound = data.GetImpound()
-        local Wanted = data.GetWanted()
-        -- Tables require JSON Encoding.
-        local Keys = json.encode(data.GetKeys())
-        local Coords = json.encode(data.GetCoords())
-        local Condition = json.encode(data.GetCondition())
-        local Modifications = json.encode(data.GetModifications())
-        -- The Key
-        local Plate = data.GetPlate()
-        --
-        MySQL.Async.insert(VehicleSaveData, {
             -- Other Variables.
-            ['@Garage'] = Garage,
+            local Garage = data.GetGarage()
             -- Booleans
-            ['@Impound'] = Impound,
-            ['@State'] = State,
-            ['@Wanted'] = Wanted,
-            -- Table Informaiton.
-            ['@Keys'] = Keys,
-            ['@Coords'] = Coords,
-            ['@Condition'] = Condition,
-            ['@Modifications'] = Modifications,
+            local State = data.GetState()
+            local Impound = data.GetImpound()
+            local Wanted = data.GetWanted()
+            -- Tables require JSON Encoding.
+            local Keys = json.encode(data.GetKeys())
+            local Coords = json.encode(data.GetCoords())
+            local Condition = json.encode(data.GetCondition())
+            local Modifications = json.encode(data.GetModifications())
+            -- The Key
+            local Plate = data.GetPlate()
             --
-            ['@Plate'] = Plate
-            }, function(r)
-                -- Do nothing.
+            MySQL.Async.insert(VehicleSaveData, {
+                -- Other Variables.
+                ['@Garage'] = Garage,
+                -- Booleans
+                ['@Impound'] = Impound,
+                ['@State'] = State,
+                ['@Wanted'] = Wanted,
+                -- Table Informaiton.
+                ['@Keys'] = Keys,
+                ['@Coords'] = Coords,
+                ['@Condition'] = Condition,
+                ['@Modifications'] = Modifications,
+                --
+                ['@Plate'] = Plate
+                }, function(r)
+                    -- Do nothing.
             end)
         end
     end

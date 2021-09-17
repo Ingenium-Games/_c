@@ -249,18 +249,19 @@ AddEventHandler("Server:Bank:Add", function(data, req)
     TriggerClientEvent("Client:Notify", xPlayer.ID, "$"..amount.." was added to your account.", "warn")
 end)
 
-
 RegisterNetEvent("Server:EnteringVehicle")
 AddEventHandler("Server:EnteringVehicle", function(vehicle, seat, name, netId)
-
+    local found = c.vehicle.Find(netId)
+    if not found then
+        local xVehicle = c.class.UnownedVehicle(netId)
+        c.vehicle.Add(netId, xVehicle)
+    end
 end)
-
 
 RegisterNetEvent("Server:EnteredVehicle")
 AddEventHandler("Server:EnteredVehicle", function(vehicle, seat, name, netId)
 
 end)
-
 
 RegisterNetEvent("Server:LeftVehicle")
 AddEventHandler("Server:LeftVehicle", function(vehicle, seat, name, netId)

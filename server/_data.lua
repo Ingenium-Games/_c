@@ -176,7 +176,7 @@ end
 
 --- Get all xVehicles
 function c.data.GetVehicles()
-    return c.vdexs
+    return c.vdex
 end
 
 --- Get all xVehicles
@@ -184,10 +184,9 @@ function c.GetVehicles()
     return c.data.GetVehicles()
 end
 
----@param plate string "Saved plate of vehicle."
+---@param plate string "Plate of vehicle."
 function c.data.GetVehicleByPlate(plate)
-    local veh = c.vehicle.GetVehicleByPlate(plate)
-    return veh
+   return c.vehicle.GetVehicleByPlate(plate)
 end
 
 function c.GetVehicleByPlate(plate)
