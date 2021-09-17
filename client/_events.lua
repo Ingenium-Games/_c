@@ -42,8 +42,6 @@ RegisterNetEvent('Client:Character:Ready')
 AddEventHandler('Client:Character:Ready', function()
     local ped = PlayerPedId()
     local ply = PlayerId()
-    -- I remove this one.
-    DisplayRadar(true)  
     --
     SetMaxWantedLevel(0)
     SetPedMinGroundTimeForStungun(ped, 12500)
@@ -82,33 +80,37 @@ end)
 
 
 RegisterNetEvent("Client:EnteringVehicle")
-AddEventHandler("Client:EnteringVehicle", function(vehicle, seat, name, netId)
+AddEventHandler("Client:EnteringVehicle", function(vehicle, seat, name, net)
     SetVehRadioStation(vehicle, "OFF")
-    TriggerEvent("Client:Notify", "Entering :"..name)
+
 end)
 
 
 RegisterNetEvent("Client:EnteredVehicle")
-AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, netId)
+AddEventHandler("Client:EnteredVehicle", function(vehicle, seat, name, net)
     SetVehRadioStation(vehicle, "OFF")
-    SetVehicleHasBeenOwnedByPlayer(vehicle, true)
+    DisplayRadar(true)
+
+    if seat == -1 then
+        SetVehicleHasBeenOwnedByPlayer(vehicle, true)
+        SetNetworkIdCanMigrate(net, true) -- enable persistance.
+    end
+    
 end)
 
 
 RegisterNetEvent("Client:LeftVehicle")
-AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, netId)
+AddEventHandler("Client:LeftVehicle", function(vehicle, seat, name, net)
+    DisplayRadar(false)
     if seat == -1 then
         SetVehicleHasBeenDrivenFlag(vehicle, true)
     end
-    TriggerEvent("Client:Notify", "Leaving :"..name)
 end)
 
 RegisterNetEvent("Client:EnteringAborted")
 AddEventHandler("Client:EnteringAborted", function()
     -- before canceling event
-
-    --
-    CancelEvent()
+    
 end)
 
 

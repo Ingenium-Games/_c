@@ -160,41 +160,38 @@ function c.GetPlayerFromIdentifier(id)
 end
 
 -- ====================================================================================--
--- Vehicles - c.vehicles = Object Table with xVehicle as referance obj, c.vehicle = function table
+-- Vehicles - c.vdex = Object Table with xVehicle as referance obj, c.vehicle = function table
 
 --- Get the xVehicle Data/Table
----@param plate string "Return the xVehicle table of data/functions"
-function c.data.GetVehicle(plate)
-    return c.vehicles[plate]
+---@param net number "Network ID 16 bit integer"
+function c.data.GetVehicle(net)
+    return c.vdex[net]
 end
 
 --- Same as above.
----@param plate string
-function c.GetVehicle(plate)
-    return c.data.GetVehicle(plate)
-end
-
---- Set the plates data.
----@param plate string
----@param data table
-function c.data.SetVehicle(plate, data)
-    c.vehicles[plate] = data
-end
-
---- Set the plate to no data.
----@param plate string
-function c.data.RemoveVehicle(plate)
-    c.vehicles[plate] = false
+---@param net number "Network ID 16 bit integer"
+function c.GetVehicle(net)
+    return c.data.GetVehicle(net)
 end
 
 --- Get all xVehicles
 function c.data.GetVehicles()
-    return c.vehicles
+    return c.vdexs
 end
 
 --- Get all xVehicles
 function c.GetVehicles()
     return c.data.GetVehicles()
+end
+
+---@param plate string "Saved plate of vehicle."
+function c.data.GetVehicleByPlate(plate)
+    local veh = c.vehicle.GetVehicleByPlate(plate)
+    return veh
+end
+
+function c.GetVehicleByPlate(plate)
+    return c.data.GetVehicleByPlate(plate)
 end
 
 -- ====================================================================================--

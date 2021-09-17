@@ -32,7 +32,8 @@ function c.class.UnownedVehicle(entity)
     local fuel = math.random(45, 100)
     self.Fuel = fuel
     --
-    self.SetState('Plate', GetVehicleNumberPlateText(self.Entity))
+    self.Plate = GetVehicleNumberPlateText(self.Entity)
+    self.SetState('Plate', self.Plate)
     self.SetState('Coords', GetEntityCoords(self.Entity))
     self.SetState('Keys', {})
     self.SetState('Fuel', fuel)
@@ -70,17 +71,17 @@ function c.class.UnownedVehicle(entity)
     self.GetCoords = function()
         local x, y, z = GetEntityCoords(self.Entity)
         local h = GetEntityHeading(self.Entity)
-        return x, y, z, h
-    end
-    --
-    self.SetCoords = function()
-        local x, y, z, h = self.GetCoords()
         local Coords = {
             ['x'] = c.math.Decimals(x, 2),
             ['y'] = c.math.Decimals(y, 2),
             ['z'] = c.math.Decimals(z, 2),
             ['h'] = c.math.Decimals(h, 2)
         }
+        return Coords
+    end
+    --
+    self.SetCoords = function()
+        local Coords = self.GetCoords()
         self.SetState('Coords', Coords)
     end
     --

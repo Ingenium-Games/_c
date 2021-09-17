@@ -414,18 +414,10 @@ function c.CreateVehicle(name, x, y, z, h, plate)
             state = c.TriggerServerCallback("CreateOwnedVehicle", entity, net, plate)
             c.SetVehicleCondition(entity, state.Condition)
             c.SetVehicleModifications(entity, state.Modifications)
-            
-            -- too test these methods.
-            c.SetVehicleCondition(entity, Entity(entity).state.Condition)
-            c.SetVehicleModifications(entity, Entity(entity).state.Modifications)
         else
             state = c.TriggerServerCallback("CreateUnownedVehicle", entity, net)
-            c.SetVehicleCondition(entity, state.Condition)
-            c.SetVehicleModifications(entity, state.Modifications)
-            
-            -- too test these methods.
-            c.SetVehicleCondition(entity, Entity(entity).state.Condition)
-            c.SetVehicleModifications(entity, Entity(entity).state.Modifications)
+            Entity(entity).state.Condition = c.GetVehicleCondition(entity)
+            Entity(entity).state.Modifications = c.GetVehicleModifications(entity)
         end
     else
         net = false

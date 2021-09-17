@@ -34,16 +34,43 @@ AddEventHandler('explosionEvent', function()
 end)
 
 AddEventHandler('entityCreated', function(ent)
+    local type = GetEntityType(ent)
+    local model = GetEntityModel(ent)
+    
     if DoesEntityExist(ent) then
-        local model = GetEntityModel(ent)
-        for _, v in pairs(conf.disable.vehicles) do
-            local diabled = v
-            if (model == diabled) then
-                DeleteEntity(ent)
-                c.debug('Entity has been Deleted.')
+        -- Object
+        if type == 3 then
+
+        -- Vehicle
+        elseif type == 2 then            
+            -- Look for blacklisted vheicles and remove them
+            for _, v in pairs(conf.disable.vehicles) do
+                local diabled = v
+                if (model == diabled) then
+                    DeleteEntity(ent)
+                    c.debug('Entity has been Deleted.')
+                end
             end
+            
+        
+        -- Ped
+        elseif type == 1 then
+            -- Look for blacklisted vheicles and remove them
+            for _, v in pairs(conf.disable.peds) do
+                local diabled = v
+                if (model == diabled) then
+                    DeleteEntity(ent)
+                    c.debug('Entity has been Deleted.')
+                end
+            end
+
+
+        -- No entity
+        else
+
         end
     end
+    
 end)
 
 AddEventHandler('entityCreating', function(ent)

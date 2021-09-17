@@ -258,13 +258,13 @@ end)
 
 RegisterNetEvent("Server:EnteredVehicle")
 AddEventHandler("Server:EnteredVehicle", function(vehicle, seat, name, netId)
-    DisplayRadar(true)
+
 end)
 
 
 RegisterNetEvent("Server:LeftVehicle")
 AddEventHandler("Server:LeftVehicle", function(vehicle, seat, name, netId)
-    DisplayRadar(false)
+
 end)
 
 RegisterNetEvent("Server:EnteringVehicle:Aborted")

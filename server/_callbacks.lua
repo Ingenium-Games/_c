@@ -83,18 +83,23 @@ end
 -- ====================================================================================--
 
 c.RegisterServerCallback("GetCurrentJobs", function(source, ...) 
-    local src = tonumber(source)
     return c.job.ActiveMembers()
 end)
 
 c.RegisterServerCallback("CreateOwnedVehicle", function(source, entity, net, plate)
     local xVehicle = c.class.OwnedVehicle(entity, plate)
-    table.insert(c.vehicles, net)
-    c.vehicles[net] = xVehicle
+    c.vehicle.Add(net, xVehicle)
+    return {
+        Condition = xVehicle.GetContition(),
+        Modifications = xVehicle.GetModifications(),
+    }
 end)
 
 c.RegisterServerCallback("CreateUnownedVehicle", function(source, entity, net)
     local xVehicle = c.class.UnownedVehicle(entity)
-    table.insert(c.vehicles, net)
-    c.vehicles[net] = xVehicle
+    c.vehicle.Add(net, xVehicle)
+    return {
+        Condition = xVehicle.GetContition(),
+        Modifications = xVehicle.GetModifications(),
+    }
 end)
