@@ -18,13 +18,10 @@ math.randomseed(c.Seed)
 function c.command.AddSuggestions()
     for _,v in pairs(c.aces) do
         if IsAceAllowed('group.'..v) then
-            local num = #c.aces[v]
-            for i=1, num do
-                c.aces[v][i]()
-            end
-            c.debug("Added "..num.." chat suggestions for group: "..v)
+            c.aces[v]()
+            c.debug("Added chat suggestions for group: "..v)
         else
-            c.debug("Not permited to use "..v.." grade commands.")
+            c.debug("Not permited to use "..v.." group commands.")
         end
         Citizen.Wait(250)
     end
