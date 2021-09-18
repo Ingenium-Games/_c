@@ -17,12 +17,14 @@ math.randomseed(c.Seed)
 ---@param group any "Check permissions and import the chat suggestions."
 function c.command.AddSuggestions()
     for _,v in pairs(c.aces) do
-        if IsAceAllowed(v) then
+        if IsAceAllowed('group.'..v) then
             local num = #c.aces[v]
             for i=1, num do
                 c.aces[v][i]()
             end
             c.debug("Added "..num.." chat suggestions for group: "..v)
+        else
+            c.debug("Not permited to use "..v.." grade commands.")
         end
         Citizen.Wait(250)
     end
@@ -84,3 +86,12 @@ if IsPlayerFreeAiming(PlayerId()) then
 
 end
 ]]--
+
+RegisterCommand('car', function(source, args, rawCommand)
+    local car = args[1]
+    local pos = GetEntityCoords(PlayerPedId())
+    local head = GetEntityHeading(PlayerPedId())
+    local entity, net, state = c.CreateVehicle(car, pos.x, pos.y, pos.z, head)
+    print(entity, net)
+    c.debug(c.table.Dump(state))
+end, false)
