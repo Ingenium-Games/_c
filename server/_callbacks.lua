@@ -87,7 +87,7 @@ c.RegisterServerCallback("GetCurrentJobs", function(source, ...)
 end)
 
 c.RegisterServerCallback("CreateOwnedVehicle", function(source, entity, net, plate)
-    local xVehicle = c.class.OwnedVehicle(entity, plate)
+    local xVehicle = c.class.OwnedVehicle(net, plate)
     c.vehicle.Add(net, xVehicle)
     return {
         Condition = xVehicle.GetContition(),
@@ -96,7 +96,7 @@ c.RegisterServerCallback("CreateOwnedVehicle", function(source, entity, net, pla
 end)
 
 c.RegisterServerCallback("CreateUnownedVehicle", function(source, entity, net)
-    local xVehicle = c.class.UnownedVehicle(entity)
+    local xVehicle = c.class.UnownedVehicle(net)
     c.vehicle.Add(net, xVehicle)
     return {
         Condition = xVehicle.GetContition(),

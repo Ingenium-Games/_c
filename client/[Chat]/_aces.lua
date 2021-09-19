@@ -45,3 +45,24 @@ c.aces.superadmin = function() end
 c.aces.developer = function() end
 
 c.aces.owner = function() end
+
+
+TriggerEvent("chat:addSuggestion", "/switch", "Use to change your character(s).")
+    TriggerEvent("chat:addSuggestion", "/setjob", "Admin Permission(s) Required.", {{
+        name = "1",
+        help = "Server ID"
+    }, {
+        name = "2",
+        help = "Job Name"
+    }, {
+        name = "3",
+        help = "Job Grade"
+    }})
+    TriggerEvent("chat:addSuggestion", "/ban", "Admin Permission(s) Required.", {{
+        name = "1",
+        help = "Server ID"
+    }})
+    TriggerEvent("chat:addSuggestion", "/kick", "Admin Permission(s) Required.", {{
+        name = "1",
+        help = "Server ID"
+    }})

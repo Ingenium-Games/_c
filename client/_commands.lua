@@ -27,20 +27,6 @@ function c.command.AddSuggestions()
     end
 end
 
-function c.command.AddSuggestion(group, event)
-    if type(event) ~= "function" then
-        c.debug("Command event not passed as function.")
-        return 
-    end
-    if not c.aces[group] then
-        c.aces[group] = {}
-        table.insert(c.aces[group], event)
-    else
-        table.insert(c.aces[group], event)    
-    end
-end
-
-
 --[[
     Animations with Keybinding
 
