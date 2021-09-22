@@ -1,3 +1,4 @@
+SetWeatherOwnedByNetwork()
 
 --[[
 Client functions
